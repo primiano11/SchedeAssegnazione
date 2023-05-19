@@ -1,8 +1,21 @@
-.example-card {
-  max-width: 400px;
+
+.drawer-container {
+  height: 100vh;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.drawer {
+  text-align: center;
+  width: 200px;
+  background-color: #3F51B5;
 }
+
+.nav-logo img{
+  width: 150px; /* Imposta la larghezza desiderata */
+  height: auto; /* Imposta l'altezza su "auto" per mantenere le proporzioni originali */
+}
+
+.empty-space {
+  height: 20px;
+  background-color: transparent;
+}
+

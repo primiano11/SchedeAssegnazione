@@ -14,9 +14,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatIconModule} from '@angular/material/icon';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RegisterComponent } from './register/register.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { RisorseComponent } from './risorse/risorse.component';
+import { AreeComponent } from './aree/aree.component';
+import { ObiettiviComponent } from './obiettivi/obiettivi.component';
+import { RouterModule } from '@angular/router';
+
+
 
 
 
@@ -26,7 +35,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    RisorseComponent,
+    AreeComponent,
+    ObiettiviComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +51,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
