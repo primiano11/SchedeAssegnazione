@@ -9,12 +9,15 @@ import { ObiettiviComponent } from './obiettivi/obiettivi.component';
 
 
 const routes: Routes = [
+  {path: '', component:HomeComponent, children: [
+    {path: '', redirectTo: 'risorse', pathMatch: 'full' },
+    {path: 'risorse', component:RisorseComponent},
+    {path: 'aree', component:AreeComponent},
+    {path: 'obiettivi', component:ObiettiviComponent}
+  ]},
   {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'home', component:HomeComponent},
-  {path: 'risorse', component:RisorseComponent},
-  {path: 'aree', component:AreeComponent},
-  {path: 'obiettivi', component:ObiettiviComponent},
+  {path: 'home', component:HomeComponent}
 ];
 
 @NgModule({
