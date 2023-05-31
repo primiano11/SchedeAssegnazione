@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 export interface PeriodicElement {
   name: string;
@@ -95,10 +97,15 @@ export class ObiettiviComponent {
 
 @Component({
   selector: 'dialog-content',
-  templateUrl: 'dialog-content.html',
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+  templateUrl: './dialog-content.html',
+  styleUrls: ['./dialog-content.css'],
+
 })
-export class DialogContent {}
+export class DialogContent {
+
+  hide = true;
+
+
+}
 
 

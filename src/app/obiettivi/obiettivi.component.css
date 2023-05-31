@@ -3,3 +3,9 @@
   padding-left: 100px;
   padding-right: 100px;
 }
+
+.background-div{
+  background-color: #081a80;
+  height: 100%;
+  width: 100%;
+}
