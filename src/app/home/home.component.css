@@ -1,17 +1,16 @@
-
 .drawer-container {
   height: 100vh;
 }
 
 .drawer {
   text-align: center;
-  width: 200px;
+  width: 250px;
   background-color: #3F51B5;
 }
 
 .nav-logo img{
-  width: 150px; /* Imposta la larghezza desiderata */
-  height: auto; /* Imposta l'altezza su "auto" per mantenere le proporzioni originali */
+  width: 180px;
+  height: auto;
 }
 
 .empty-space {
@@ -19,3 +18,6 @@
   background-color: transparent;
 }
 
+.mat-nav-list .mat-list-item {
+  color: red; /* Cambia il colore del testo qui */
+}

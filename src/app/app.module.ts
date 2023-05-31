@@ -24,6 +24,9 @@ import { RisorseComponent } from './risorse/risorse.component';
 import { AreeComponent } from './aree/aree.component';
 import { ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { RouterModule } from '@angular/router';
+import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -55,7 +58,10 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
