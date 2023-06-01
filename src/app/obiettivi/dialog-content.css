@@ -1,24 +1,13 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px; /* Imposta la larghezza desiderata */
-  max-width: 90%; /* Imposta una larghezza massima in percentuale per adattarsi alla dimensione dello schermo */
-  height: 400px; /* Imposta l'altezza desiderata */
-  max-height: 90%; /* Imposta un'altezza massima in percentuale per adattarsi alla dimensione dello schermo */
+.login-form{
   padding: 20px;
+  align-items: center;
 }
 
 mat-form-field {
   width: 100%;
-  box-sizing: border-box;
 }
 
 .empty-space {
   height: 20px;
   background-color: transparent;
-}
-
-a {
-  color: red;
 }

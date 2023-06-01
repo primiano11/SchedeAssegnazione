@@ -1,18 +1,40 @@
-<h2>Aggiungi obiettivo strategico</h2>
+<div fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+  <h2>Aggiungi obiettivo strategico</h2>
 
-<mat-form-field appearance="outline">
-  <mat-label>Input</mat-label>
-  <input matInput>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Select</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Textarea</mat-label>
-  <textarea matInput></textarea>
-</mat-form-field>
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Codice Obiettivo</mat-label>
+      <input matInput [(ngModel)]="codiceObiettivo" name="codiceObiettivo" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Area Strategica</mat-label>
+      <input matInput [(ngModel)]="areaStrategica" name="areaStrategica" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tipologia</mat-label>
+      <input matInput [(ngModel)]="tipologia" name="tipologia" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="nome" name="nome" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Presidio</mat-label>
+      <input matInput [(ngModel)]="presidio" name="presidio" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Stakeholder</mat-label>
+      <input matInput [(ngModel)]="stakeholder" name="stakeholder" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Anno</mat-label>
+      <input matInput [(ngModel)]="anno" name="anno" required>
+    </mat-form-field>
+
+    <div class="dialog-buttons">
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungi()">Aggiungi</button>
+      <button mat-button color="warn">Annulla</button>
+    </div>
+  </form>
+</div>
 

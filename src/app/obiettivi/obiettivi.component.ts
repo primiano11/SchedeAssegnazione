@@ -5,6 +5,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 export interface PeriodicElement {
   name: string;
@@ -76,15 +78,20 @@ export class ObiettiviComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
+
     const dialogRef = this.dialog.open(DialogContent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      // Aggiungi i dati del form alla tabella
+      const newElement: ObiettivoStrategico = result;
+      this.dataSourceObiettiviStrat = [...this.dataSourceObiettiviStrat, newElement]; // Aggiungi il nuovo elemento all'array
+    }
+  });
   }
 
 
-  displayedColumnsOS: string[] = ['codice', 'area', 'tipologia', 'nome'];
+  displayedColumnsStrategici: string[] = ['codice', 'area', 'tipologia', 'nome', 'presidio', 'stakeholder', 'anno'];
   displayedColumnsIndividuali: string[] = ['obiettivoStrategico', 'codice', 'obopstr', 'responsabilePolitico', 'responsabile', 'area', 'tipologia', 'indicatore', 'peso', 'anno'];
   dataSourceObiettiviStrat = OBIETTIVISTRATEGICI_DATA;
   dataSourceObiettiviIndividuali = OBIETTIVIINDIVIDUALI_DATA;
@@ -105,6 +112,36 @@ export class DialogContent {
 
   hide = true;
 
+  codiceObiettivo: number;
+  areaStrategica: string;
+  tipologia: string;
+  nome: string;
+  presidio: string;
+  stakeholder: string;
+  anno: number;
+
+  constructor(public dialogRef: MatDialogRef<DialogContent>) {
+    this.codiceObiettivo = 1;
+    this.areaStrategica = '';
+    this.tipologia = '';
+    this.nome = '';
+    this.presidio = '';
+    this.stakeholder = '';
+    this.anno = 2023;
+  }
+
+  aggiungi() {
+    const newElement: ObiettivoStrategico = {
+      codice: this.codiceObiettivo,
+      area: this.areaStrategica,
+      tipologia: this.tipologia,
+      nome: this.nome,
+      presidio: this.presidio,
+      stakeholder: this.stakeholder,
+      anno: this.anno
+    };
+    this.dialogRef.close(newElement);
+  }
 
 }
 
