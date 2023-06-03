@@ -1,0 +1,53 @@
+<div fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+  <h2>Aggiungi obiettivo individuale</h2>
+
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Obiettivo Strategico</mat-label>
+      <input matInput [(ngModel)]="obiettivoStrategico" name="obiettivoStrategico" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Codice</mat-label>
+      <input matInput [(ngModel)]="codice" name="codice" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>obopstr</mat-label>
+      <input matInput [(ngModel)]="obopstr" name="obopstr" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>responsabilePolitico</mat-label>
+      <input matInput [(ngModel)]="responsabilePolitico" name="responsabilePolitico" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>responsabile</mat-label>
+      <input matInput [(ngModel)]="responsabile" name="responsabile" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>area</mat-label>
+      <input matInput [(ngModel)]="area" name="area" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>tipologia</mat-label>
+      <input matInput [(ngModel)]="tipologia" name="tipologia" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>indicatore</mat-label>
+      <input matInput [(ngModel)]="indicatore" name="indicatore" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>peso</mat-label>
+      <input matInput [(ngModel)]="peso" name="peso" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>anno</mat-label>
+      <input matInput [(ngModel)]="anno" name="anno" required>
+    </mat-form-field>
+
+    <div class="dialog-buttons">
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiOi()">Aggiungi</button>
+      <button mat-button color="warn">Annulla</button>
+    </div>
+  </form>
+</div>
+
+

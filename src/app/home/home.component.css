@@ -17,3 +17,9 @@
   height: 20px;
   background-color: transparent;
 }
+
+.background-div{
+  background-color: #081a80;
+  height: 100%;
+  width: 100%;
+}

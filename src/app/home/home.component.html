@@ -1,7 +1,8 @@
+<div class="background-div">
 <mat-drawer-container class="drawer-container">
   <mat-drawer mode="side" opened class="drawer">
      <mat-nav-list class="nav-list-design">
-        <div class="nav-logo">
+        <div routerLink="/home" routerLinkActive="active" class="nav-logo">
            <img src="https://www2.unimol.it/wp-content/uploads/2021/03/Unimol-logo.png" alt="Logo Unimol">
         </div>
         <div class="empty-space"></div>
@@ -14,3 +15,4 @@
      <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+</div>

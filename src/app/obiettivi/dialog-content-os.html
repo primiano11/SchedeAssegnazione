@@ -3,10 +3,6 @@
 
   <form #form="ngForm">
     <mat-form-field appearance="outline">
-      <mat-label>Codice Obiettivo</mat-label>
-      <input matInput [(ngModel)]="codiceObiettivo" name="codiceObiettivo" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
       <mat-label>Area Strategica</mat-label>
       <input matInput [(ngModel)]="areaStrategica" name="areaStrategica" required>
     </mat-form-field>
@@ -32,9 +28,10 @@
     </mat-form-field>
 
     <div class="dialog-buttons">
-      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungi()">Aggiungi</button>
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiOs()">Aggiungi</button>
       <button mat-button color="warn">Annulla</button>
     </div>
   </form>
 </div>
+
 

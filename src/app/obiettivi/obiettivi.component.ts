@@ -38,18 +38,8 @@ export interface ObiettivoIndividuale{
   anno: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+var index = 3;
+
 
 const OBIETTIVISTRATEGICI_DATA: ObiettivoStrategico[] = [
 
@@ -77,15 +67,28 @@ export class ObiettiviComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog() {
+  openDialogOs() {
 
-    const dialogRef = this.dialog.open(DialogContent);
+    const dialogRef = this.dialog.open(DialogContentOs);
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
       // Aggiungi i dati del form alla tabella
       const newElement: ObiettivoStrategico = result;
       this.dataSourceObiettiviStrat = [...this.dataSourceObiettiviStrat, newElement]; // Aggiungi il nuovo elemento all'array
+    }
+  });
+  }
+
+  openDialogOi() {
+
+    const dialogRef = this.dialog.open(DialogContentOi);
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      // Aggiungi i dati del form alla tabella
+      const newElement: ObiettivoIndividuale = result;
+      this.dataSourceObiettiviIndividuali = [...this.dataSourceObiettiviIndividuali, newElement]; // Aggiungi il nuovo elemento all'array
     }
   });
   }
@@ -103,12 +106,12 @@ export class ObiettiviComponent {
 }
 
 @Component({
-  selector: 'dialog-content',
-  templateUrl: './dialog-content.html',
-  styleUrls: ['./dialog-content.css'],
+  selector: 'dialog-content-os',
+  templateUrl: './dialog-content-os.html',
+  styleUrls: ['./dialog-content-os.css'],
 
 })
-export class DialogContent {
+export class DialogContentOs {
 
   hide = true;
 
@@ -120,7 +123,7 @@ export class DialogContent {
   stakeholder: string;
   anno: number;
 
-  constructor(public dialogRef: MatDialogRef<DialogContent>) {
+  constructor(public dialogRef: MatDialogRef<DialogContentOs>) {
     this.codiceObiettivo = 1;
     this.areaStrategica = '';
     this.tipologia = '';
@@ -130,9 +133,12 @@ export class DialogContent {
     this.anno = 2023;
   }
 
-  aggiungi() {
+  aggiungiOs() {
+
+    index = index + 1;
+
     const newElement: ObiettivoStrategico = {
-      codice: this.codiceObiettivo,
+      codice: index,
       area: this.areaStrategica,
       tipologia: this.tipologia,
       nome: this.nome,
@@ -140,6 +146,65 @@ export class DialogContent {
       stakeholder: this.stakeholder,
       anno: this.anno
     };
+    this.dialogRef.close(newElement);
+  }
+
+}
+
+
+
+@Component({
+  selector: 'dialog-content-oi',
+  templateUrl: './dialog-content-oi.html',
+  styleUrls: ['./dialog-content-oi.css'],
+
+})
+export class DialogContentOi {
+
+  hide = true;
+
+
+obiettivoStrategico: string;
+codice: number;
+obopstr: string;
+responsabilePolitico: string;
+responsabile: string;
+area: string;
+tipologia: string;
+indicatore: string;
+peso: number;
+anno: number;
+
+  constructor(public dialogRef: MatDialogRef<DialogContentOi>) {
+    this.obiettivoStrategico = '';
+    this.codice = 1;
+    this.obopstr = '';
+    this.responsabilePolitico = '';
+    this.responsabile = '';
+    this.area = '';
+    this.tipologia = '';
+    this.indicatore = '';
+    this.peso = 0;
+    this.anno = 0;
+  }
+
+  aggiungiOi() {
+
+    index = index + 1;
+
+    const newElement: ObiettivoIndividuale = {
+      obiettivoStrategico: this.obiettivoStrategico,
+      codice: index,
+      obopstr: this.obopstr,
+      responsabilePolitico: this.responsabilePolitico,
+      responsabile: this.responsabile,
+      area: this.area,
+      tipologia: this.tipologia,
+      indicatore: this.indicatore,
+      peso: this.peso,
+      anno: this.anno
+    };
+
     this.dialogRef.close(newElement);
   }
 

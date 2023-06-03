@@ -13,28 +13,21 @@
       </mat-expansion-panel-header>
       <table mat-table [dataSource]="dataSourceObiettiviStrat" class="mat-elevation-z8">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
         <ng-container matColumnDef="codice">
           <th mat-header-cell *matHeaderCellDef> Codice Obiettivo </th>
           <td mat-cell *matCellDef="let element"> {{element.codice}} </td>
         </ng-container>
 
-        <!-- Name Column -->
         <ng-container matColumnDef="area">
           <th mat-header-cell *matHeaderCellDef> Area Strategica </th>
           <td mat-cell *matCellDef="let element"> {{element.area}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
         <ng-container matColumnDef="tipologia">
           <th mat-header-cell *matHeaderCellDef> Tipologia </th>
           <td mat-cell *matCellDef="let element"> {{element.tipologia}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef> Nome </th>
           <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -58,7 +51,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumnsStrategici"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsStrategici;"></tr>
       </table>
-      <button mat-icon-button color="primary" (click)="openDialog()">
+      <button mat-icon-button color="primary" (click)="openDialogOs()">
         <mat-icon>add</mat-icon>
       </button>
     </mat-expansion-panel>
@@ -72,7 +65,7 @@
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Obiettivi strategici
+          Obiettivi individuali
         </mat-panel-title>
         <mat-panel-description>
           Clicca per visualizzare
@@ -133,6 +126,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumnsIndividuali"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsIndividuali;"></tr>
       </table>
+      <button mat-icon-button color="primary" (click)="openDialogOi()">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-expansion-panel>
   </mat-accordion>
   </div>

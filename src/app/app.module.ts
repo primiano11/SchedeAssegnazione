@@ -22,7 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { RisorseComponent } from './risorse/risorse.component';
 import { AreeComponent } from './aree/aree.component';
-import { DialogContent, ObiettiviComponent } from './obiettivi/obiettivi.component';
+import { DialogContentOi, DialogContentOs, ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { RouterModule } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -43,7 +43,8 @@ import {MatSelectModule} from '@angular/material/select';
     RisorseComponent,
     AreeComponent,
     ObiettiviComponent,
-    DialogContent
+    DialogContentOs,
+    DialogContentOi
   ],
   imports: [
     BrowserModule,
