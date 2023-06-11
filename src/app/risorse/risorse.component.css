@@ -1,3 +1,35 @@
-.main-a {
-  color: red;
+.main-div{
+  padding-top: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.background-div{
+  background-color: #081a80;
+  height: 100%;
+  width: 100%;
+}
+
+.add-instance-button{
+  padding: 1%;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.mat-elevation-z8{
+
+}
+
+.table-div{
+  background-color: white;
+  padding: 1%;
+  border-radius: 10px 10px 10px 20px;
+  font-size: 150%;
+  font-weight: 500;
+}
+
+.table-empty-space{
+  height: 15px;
 }

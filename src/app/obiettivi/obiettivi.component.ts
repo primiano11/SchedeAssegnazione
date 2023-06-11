@@ -149,6 +149,10 @@ export class DialogContentOs {
     this.dialogRef.close(newElement);
   }
 
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 }
 
 
@@ -205,7 +209,12 @@ anno: number;
       anno: this.anno
     };
 
+
     this.dialogRef.close(newElement);
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
 }

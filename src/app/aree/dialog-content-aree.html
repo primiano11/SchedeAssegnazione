@@ -1,0 +1,27 @@
+<div fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+  <h2>Aggiungi Area</h2>
+
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Codice</mat-label>
+      <input matInput [(ngModel)]="codice" name="codice" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="nome" name="nome" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tipologia</mat-label>
+      <input matInput [(ngModel)]="tipologia" name="tipologia" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Descrizione</mat-label>
+      <input matInput [(ngModel)]="descrizione" name="descrizione" required>
+    </mat-form-field>
+
+    <div class="dialog-buttons">
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiArea()">Aggiungi</button>
+      <button mat-button color="warn" (click)="closeDialog()">Annulla</button>
+    </div>
+  </form>
+</div>

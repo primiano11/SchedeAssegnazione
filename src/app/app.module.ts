@@ -20,8 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './register/register.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { RisorseComponent } from './risorse/risorse.component';
-import { AreeComponent } from './aree/aree.component';
+import { DialogContentDip, RisorseComponent } from './risorse/risorse.component';
+import { AreeComponent, DialogContentAree } from './aree/aree.component';
 import { DialogContentOi, DialogContentOs, ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { RouterModule } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
@@ -44,7 +44,9 @@ import {MatSelectModule} from '@angular/material/select';
     AreeComponent,
     ObiettiviComponent,
     DialogContentOs,
-    DialogContentOi
+    DialogContentOi,
+    DialogContentDip,
+    DialogContentAree
   ],
   imports: [
     BrowserModule,
