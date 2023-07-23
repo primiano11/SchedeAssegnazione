@@ -19,7 +19,29 @@
 }
 
 .background-div{
-  background-color: #081a80;
+  background-color: rgb(219, 219, 219);
   height: 100%;
   width: 100%;
+}
+
+.custom-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 150%;
+  font-variant: small-caps;
+  color: white;
+}
+
+.custom-link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.custom-link:active {
+  background-color: rgba(0, 0, 0, 0.08);
 }
