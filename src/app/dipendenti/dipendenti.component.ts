@@ -1,35 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data-service';
+import { Component, OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Dipendente } from './dipendente';
+import { Observable } from 'rxjs';
+import {MatTableModule} from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
+import { CdkTable } from '@angular/cdk/table';
+
 
 @Component({
   selector: 'app-dipendenti',
   templateUrl: './dipendenti.component.html',
   styleUrls: ['./dipendenti.component.css']
 })
-export class DipendentiComponent implements OnInit {
+export class DipendentiComponent {
 
-  tabellaData: any[] = [];
-  displayedColumns: string[] = ['matricola', 'nome', 'cognome', 'unita_organizzativa']; // Aggiungi le altre colonne a seconda della tua tabella
-  dataSource: MatTableDataSource<any>;
+  readonly ROOT_URL = "http://localhost:8080/api/dipendenti";
 
-  constructor(private dataService: DataService) {
-    this.dataSource = new MatTableDataSource<any>(this.tabellaData);
+  dipendenti: MatTableDataSource<Dipendente> = new MatTableDataSource<Dipendente>();
+  displayedColumnsDipendenti: string[] = ['matricola', 'nome', 'cognome', 'unitaOrganizzativa'];
+
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getDipendenti();
   }
 
-  ngOnInit(): void {
-    this.caricaDatiTabella();
+  getDipendenti() {
+    this.http.get<Dipendente[]>(this.ROOT_URL).subscribe((data) => {
+      this.dipendenti = new MatTableDataSource<Dipendente>(data);
+    });
   }
 
-  caricaDatiTabella(): void {
-    this.dataService.getTabellaData().subscribe(
-      (data) => {
-        this.tabellaData = data;
-        this.dataSource.data = this.tabellaData;
-      },
-      (error) => {
-        console.error('Si è verificato un errore durante il recupero dei dati:', error);
-      }
-    );
-  }
 }

@@ -48,7 +48,7 @@ export class RisorseComponent {
   constructor(public dialog: MatDialog) {}
 
 
-  displayedColumnsDipendenti: string[] = ['matricola', 'nome', 'cognome', 'unitaOrganizzativa', 'azioni'];
+  displayedColumnsDipendenti: string[] = ['matricola', 'nome', 'cognome', 'unitaOrganizzativa'];
   dataSourceDipendenti = DIPENDENTI_DATA;
   panelOpenState = false;
 

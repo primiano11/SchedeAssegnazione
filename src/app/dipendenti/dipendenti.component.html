@@ -1,26 +1,27 @@
-<table mat-table [dataSource]="dataSource">
+<h1> TEST HTTP REQUEST </h1>
+
+<button (click)="getDipendenti()"></button>
+
+
+
+
+<table mat-table [dataSource]="dipendenti" class="mat-elevation-z8">
   <ng-container matColumnDef="matricola">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let row">{{ row.matricola }}</td>
+     <th mat-header-cell *matHeaderCellDef> Matricola </th>
+     <td mat-cell *matCellDef="let element"> {{element.matricola}} </td>
   </ng-container>
-
   <ng-container matColumnDef="nome">
-    <th mat-header-cell *matHeaderCellDef>Colonna1</th>
-    <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+     <th mat-header-cell *matHeaderCellDef> Nome </th>
+     <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
   </ng-container>
-
   <ng-container matColumnDef="cognome">
-    <th mat-header-cell *matHeaderCellDef>Colonna2</th>
-    <td mat-cell *matCellDef="let row">{{ row.cognome }}</td>
+     <th mat-header-cell *matHeaderCellDef> Cognome </th>
+     <td mat-cell *matCellDef="let element"> {{element.cognome}} </td>
   </ng-container>
-
   <ng-container matColumnDef="unitaOrganizzativa">
-    <th mat-header-cell *matHeaderCellDef>Colonna2</th>
-    <td mat-cell *matCellDef="let row">{{ row.unitaOrganizzativa }}</td>
+     <th mat-header-cell *matHeaderCellDef> unitaOrganizzativa </th>
+     <td mat-cell *matCellDef="let element"> {{element.unitaOrganizzativa}} </td>
   </ng-container>
-
-  <!-- Aggiungi le altre colonne a seconda della tua tabella -->
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsDipendenti"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsDipendenti;"></tr>
 </table>

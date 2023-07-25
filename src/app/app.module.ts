@@ -29,7 +29,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { DipendentiComponent } from './dipendenti/dipendenti.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -69,7 +69,7 @@ import { DipendentiComponent } from './dipendenti/dipendenti.component';
     MatExpansionModule,
     MatDialogModule,
     MatSelectModule,
-
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
