@@ -28,7 +28,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
-import { DipendentiComponent } from './dipendenti/dipendenti.component';
+import { DialogContentDipendenti, DipendentiComponent } from './dipendenti/dipendenti.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -48,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     DialogContentOi,
     DialogContentDip,
     DialogContentAree,
-    DipendentiComponent
+    DipendentiComponent,
+    DialogContentDipendenti
   ],
   imports: [
     BrowserModule,

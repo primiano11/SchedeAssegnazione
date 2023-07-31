@@ -1,6 +1,6 @@
 export interface Dipendente {
   matricola: number;
   nome: string;
-  cognome: number;
+  cognome: string;
   unitaOrganizzativa: string;
 }

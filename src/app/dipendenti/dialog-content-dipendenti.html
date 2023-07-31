@@ -1,0 +1,23 @@
+<div fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+  <h2>Aggiungi Dipendente</h2>
+
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="nome" name="nome" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cognome</mat-label>
+      <input matInput [(ngModel)]="cognome" name="cognome" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Unità Organizzativa</mat-label>
+      <input matInput [(ngModel)]="unitaOrganizzativa" name="unitaOrganizzativa" required>
+    </mat-form-field>
+
+    <div class="dialog-buttons">
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiDip()">Aggiungi</button>
+      <button mat-button color="warn" (click)="closeDialog()">Annulla</button>
+    </div>
+  </form>
+</div>

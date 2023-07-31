@@ -10,6 +10,7 @@ export interface Area {
   tipologia: string;
   descrizione: string;
   stakeholder: string;
+  anno: number;
 
   }
 
@@ -19,21 +20,24 @@ export interface Area {
       nome: 'Area X',
       tipologia: 'Tipologia X',
       descrizione: 'Descrixione X',
-      stakeholder:'Stakeholder X'},
+      stakeholder:'Stakeholder X',
+      anno: 2023},
 
 
       {codice: 2,
         nome: 'Area Y',
         tipologia: 'Tipologia Y',
         descrizione: 'Descrixione Y',
-        stakeholder:'Stakeholder Y'},
+        stakeholder:'Stakeholder Y',
+        anno: 2023},
 
 
         {codice: 3,
           nome: 'Area Z',
           tipologia: 'Tipologia Z',
           descrizione: 'Descrixione Z',
-          stakeholder:'Stakeholder Z'},
+          stakeholder:'Stakeholder Z',
+          anno: 2023},
 
   ]
 
@@ -52,7 +56,7 @@ export class AreeComponent {
   constructor(public dialog: MatDialog) {}
 
 
-  displayedColumnsAree: string[] = ['codice', 'nome', 'tipologia', 'descrizione', 'stakeholder'];
+  displayedColumnsAree: string[] = ['codice', 'nome', 'tipologia', 'descrizione', 'stakeholder', 'anno'];
   dataSourceAree = AREE_DATA;
   panelOpenState = false;
 
@@ -89,6 +93,7 @@ export class DialogContentAree {
   tipologia: string;
   descrizione: string;
   stakeholder: string;
+  anno: number;
 
   constructor(public dialogRef: MatDialogRef<DialogContentAree>) {
     this.codice = 1;
@@ -96,6 +101,7 @@ export class DialogContentAree {
     this.tipologia = '';
     this.descrizione = '';
     this.stakeholder = '';
+    this.anno = 2023;
   }
 
   closeDialog(): void {
@@ -111,7 +117,8 @@ export class DialogContentAree {
       nome: this.nome,
       tipologia: this.tipologia,
       descrizione: this.descrizione,
-      stakeholder: this.stakeholder
+      stakeholder: this.stakeholder,
+      anno: 2023
     };
     this.dialogRef.close(newElement);
   }
