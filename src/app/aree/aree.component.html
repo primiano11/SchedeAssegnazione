@@ -1,12 +1,13 @@
 <div class="background-div">
   <div class="main-div">
      <div class="add-instance-button">
-        <button (click)="openDialogAree()" mat-raised-button>Aggiungi area</button>
+        <button (click)="getAree()" mat-raised-button>AGGIORNA AREE</button>
+        <button (click)="openDialogAree()" mat-raised-button>AGGIUNGI AREE</button>
      </div>
      <div class="table-div">
         Aree
         <div class="table-empty-space"></div>
-        <table mat-table [dataSource]="dataSourceAree" class="mat-elevation-z8">
+        <table mat-table [dataSource]="aree" class="mat-elevation-z8">
            <ng-container matColumnDef="codice">
               <th mat-header-cell *matHeaderCellDef> Codice </th>
               <td mat-cell *matCellDef="let element"> {{element.codice}} </td>

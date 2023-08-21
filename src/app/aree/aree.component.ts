@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Optional, Inject} from '@angular/core';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {MatTableModule} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { CdkTable } from '@angular/cdk/table';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Area {
 
@@ -14,36 +18,6 @@ export interface Area {
 
   }
 
-  const AREE_DATA: Area[] = [
-
-    {codice: 1,
-      nome: 'Area X',
-      tipologia: 'Tipologia X',
-      descrizione: 'Descrixione X',
-      stakeholder:'Stakeholder X',
-      anno: 2023},
-
-
-      {codice: 2,
-        nome: 'Area Y',
-        tipologia: 'Tipologia Y',
-        descrizione: 'Descrixione Y',
-        stakeholder:'Stakeholder Y',
-        anno: 2023},
-
-
-        {codice: 3,
-          nome: 'Area Z',
-          tipologia: 'Tipologia Z',
-          descrizione: 'Descrixione Z',
-          stakeholder:'Stakeholder Z',
-          anno: 2023},
-
-  ]
-
-
-  var index = 3;
-
 
 @Component({
   selector: 'app-aree',
@@ -52,27 +26,32 @@ export interface Area {
 })
 export class AreeComponent {
 
+    readonly ROOT_URL = "http://localhost:8080/api/aree/getall";
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private http: HttpClient, public dialog: MatDialog) {}
 
-
+  aree: MatTableDataSource<Area> = new MatTableDataSource<Area>();
   displayedColumnsAree: string[] = ['codice', 'nome', 'tipologia', 'descrizione', 'stakeholder', 'anno'];
-  dataSourceAree = AREE_DATA;
-  panelOpenState = false;
 
 
+  ngOnInit() {
+    this.getAree();
+  }
 
   openDialogAree() {
-
     const dialogRef = this.dialog.open(DialogContentAree);
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      // Aggiungi i dati del form alla tabella
-      const newElement: Area = result;
-      this.dataSourceAree = [...this.dataSourceAree, newElement]; // Aggiungi il nuovo elemento all'array
-    }
-  });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAree();
+    });
+
+  }
+
+
+    getAree() {
+    this.http.get<Area[]>(this.ROOT_URL).subscribe((data) => {
+      this.aree = new MatTableDataSource<Area>(data);
+    });
   }
 
 }
@@ -86,6 +65,9 @@ export class AreeComponent {
 })
 export class DialogContentAree {
 
+  private readonly SAVE_DIPENDENTE_URL = 'http://localhost:8080/api/aree/save';
+
+
   hide = true;
 
   codice: number;
@@ -95,7 +77,7 @@ export class DialogContentAree {
   stakeholder: string;
   anno: number;
 
-  constructor(public dialogRef: MatDialogRef<DialogContentAree>) {
+  constructor(public dialogRef: MatDialogRef<DialogContentAree>, private http: HttpClient) {
     this.codice = 1;
     this.nome = '';
     this.tipologia = '';
@@ -110,17 +92,32 @@ export class DialogContentAree {
 
   aggiungiArea() {
 
-    index = index + 1;
+    const params = new HttpParams()
+    .set('nome', this.nome)
+    .set('tipologia', this.tipologia)
+    .set('descrizione', this.descrizione)
+    .set('stakeholder', this.stakeholder)
+    .set('anno', this.anno);
 
-    const newElement: Area = {
-      codice: index,
-      nome: this.nome,
-      tipologia: this.tipologia,
-      descrizione: this.descrizione,
-      stakeholder: this.stakeholder,
-      anno: 2023
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: params,
     };
-    this.dialogRef.close(newElement);
+
+    this.http.post(this.SAVE_DIPENDENTE_URL, null, httpOptions).subscribe(
+      (response) => {
+        // Gestisci la risposta del server qui, se necessario.
+        console.log('Risposta POST:', response);
+      },
+      (error) => {
+        // Gestisci eventuali errori qui.
+        console.error('Errore POST:', error);
+      }
+    );
+
+    this.dialogRef.close();
   }
 
 }

@@ -4,15 +4,19 @@
   <form #form="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Obiettivo Strategico</mat-label>
-      <input matInput [(ngModel)]="obiettivoStrategico" name="obiettivoStrategico" required>
+      <mat-select [(ngModel)]="obiettivoStrategico" name="obiettivoStrategico" required>
+        <mat-option value="opzione 1">Opzione 1</mat-option>
+        <mat-option value="opzione 2">Opzione 2</mat-option>
+        <mat-option value="opzione 3">Opzione 3</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Codice</mat-label>
       <input matInput [(ngModel)]="codice" name="codice" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>obopstr</mat-label>
-      <input matInput [(ngModel)]="obopstr" name="obopstr" required>
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="nome" name="nome" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>responsabilePolitico</mat-label>

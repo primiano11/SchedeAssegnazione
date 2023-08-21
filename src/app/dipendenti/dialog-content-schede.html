@@ -1,0 +1,41 @@
+<mat-card class="dialog-container">
+  <h2 class="dialog-title">Scheda di Assegnazione degli obiettivi individuali 2023</h2>
+  <div class="dialog-content">
+    <p><strong>Nome:</strong> {{ rowData.nome }}</p>
+    <p><strong>Cognome:</strong> {{ rowData.cognome }}</p>
+    <p><strong>Matricola:</strong> {{ rowData.matricola }}</p>
+    <p><strong>Unità Organizzativa:</strong> {{ rowData.unitaOrganizzativa }}</p>
+  </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Codice</th>
+      <th>Area</th>
+      <th>Tipologia</th>
+      <th>Nome</th>
+      <th>Presidio</th>
+      <th>Stakeholder</th>
+      <th>Anno</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obiettivo of obiettivi">
+      <td>{{ obiettivo.codice }}</td>
+      <td>{{ obiettivo.area }}</td>
+      <td>{{ obiettivo.tipologia }}</td>
+      <td>{{ obiettivo.nome }}</td>
+      <td>{{ obiettivo.presidio }}</td>
+      <td>{{ obiettivo.stakeholder }}</td>
+      <td>{{ obiettivo.anno }}</td>
+      <!-- Aggiungi altre colonne della riga qui -->
+    </tr>
+  </tbody>
+</table>
+
+
+  <div class="dialog-actions">
+    <button mat-button (click)="closeDialog()">Chiudi</button>
+    <button mat-button color="primary">Salva Obiettivi</button>
+  </div>
+</mat-card>

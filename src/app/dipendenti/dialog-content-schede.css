@@ -1,0 +1,51 @@
+
+.dialog-container {
+  width: 210mm; /* Larghezza del foglio A4 */
+  height: 297mm; /* Altezza del foglio A4 */
+  max-width: calc(100vw - 32px); /* Massima larghezza consentita per adattarsi a schermi più piccoli */
+  max-height: calc(100vh - 32px); /* Massima altezza consentita per adattarsi a schermi più piccoli */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Aggiungi una leggera ombra */
+  background-color: #ffffff; /* Sfondo bianco */
+  border-radius: 4px; /* Bordi arrotondati */
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.dialog-content {
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+thead th {
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tbody td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
