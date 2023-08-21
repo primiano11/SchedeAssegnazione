@@ -9,31 +9,8 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Dipendente } from "../risorse/risorse.component";
-
-
-export interface ObiettivoStrategico {
-  codice: number;
-  area: string;
-  tipologia: string;
-  nome: string;
-  presidio: string;
-  stakeholder: string;
-  anno: number;
-}
-
-export interface ObiettivoIndividuale {
-  obiettivoStrategico: string;
-  codice: number;
-  nome: string;
-  responsabilePolitico: string;
-  responsabile: string;
-  area: string;
-  tipologia: string;
-  indicatore: string;
-  peso: number;
-  anno: number;
-  dipendente: Dipendente;
-}
+import { ObiettivoIndividuale } from "../models/ObiettivoIndividuale";
+import { ObiettivoStrategico } from "../models/ObiettivoStrategico";
 
 var index = 3;
 
@@ -126,10 +103,6 @@ export class ObiettiviComponent {
     });
   }
 
-  getDipendenteInfo(dipendente: Dipendente): number {
-    return dipendente.matricola;
-  }
-
   ngOnInit() {
     this.getOI();
   }
@@ -191,6 +164,7 @@ export class DialogContentOi {
   private readonly SAVE_OI_URL = 'http://localhost:8080/api/obiettivi/saveoi';
 
   hide = true;
+  listaDipendenti: Dipendente[] = [];
 
   obiettivoStrategico: string;
   codice: number;
@@ -202,7 +176,7 @@ export class DialogContentOi {
   indicatore: string;
   peso: number;
   anno: number;
-  dipendente: number;
+  dipendente: Dipendente;
 
   constructor(public dialogRef: MatDialogRef<DialogContentOi>, private http: HttpClient) {
     this.obiettivoStrategico = "";
@@ -215,7 +189,16 @@ export class DialogContentOi {
     this.indicatore = "";
     this.peso = 0;
     this.anno = 2023;
-    this.dipendente = 0;
+    this.dipendente = {matricola: 0,
+      nome: "",
+      cognome: "",
+      unitaOrganizzativa: ""}
+  }
+
+  getListaDipendenti(){
+    this.http.get<Dipendente[]>("http://localhost:8080/api/dipendenti/getall").subscribe((data) => {
+      this.listaDipendenti = data;
+    });
   }
 
   aggiungiOi() {
@@ -230,7 +213,8 @@ export class DialogContentOi {
       .set("tipologia", this.tipologia)
       .set("indicatore", this.indicatore)
       .set("peso", this.peso)
-      .set("anno", this.anno);
+      .set("anno", this.anno)
+      .set("dipendente", this.dipendente.matricola);
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -254,5 +238,9 @@ export class DialogContentOi {
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  ngOnInit() {
+    this.getListaDipendenti();
   }
 }

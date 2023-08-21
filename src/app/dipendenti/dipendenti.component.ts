@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional, Inject} from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { Dipendente } from './dipendente';
+import { Dipendente } from '../models/dipendente';
 import { Observable } from 'rxjs';
 import {MatTableModule} from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';

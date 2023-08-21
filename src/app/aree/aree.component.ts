@@ -6,17 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CdkTable } from '@angular/cdk/table';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface Area {
-
-  codice: number;
-  nome: string;
-  tipologia: string;
-  descrizione: string;
-  stakeholder: string;
-  anno: number;
-
-  }
+import { Area } from '../models/area';
 
 
 @Component({
