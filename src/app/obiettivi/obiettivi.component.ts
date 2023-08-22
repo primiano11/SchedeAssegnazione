@@ -191,53 +191,14 @@ export class DialogContentOi {
     });
   }
 
-
-  aggiungiOi(){
-
-    const params = new HttpParams()
-      .set("obiettivoStrategico", this.obiettivoStrategico.codice)
-      .set("nome", this.nome)
-      .set("responsabilePolitico", this.responsabilePolitico)
-      .set("responsabile", this.responsabile)
-      .set("area", this.obiettivoStrategico.area.codice)
-      .set("tipologia", this.tipologia)
-      .set("indicatore", this.indicatore)
-      .set("peso", this.peso)
-      .set("anno", this.anno)
-      .set("dipendente", this.dipendente.matricola);
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-      params: params,
-    };
-
-    this.http.post(this.SAVE_OI_URL, null, httpOptions).subscribe(
-      (response) => {
-        console.log("Risposta POST:", response);
-        this.dialogRef.close();
-      },
-      (error) => {
-        // Gestisci eventuali errori qui.
-        console.error("Errore POST:", error);
-        this.dialogRef.close();
-      }
-    );
-
-    this.dialogRef.close();
-
-  }
-
-
-  aggiungiOai() {
+  aggiungiOi() {
 
     const params = new HttpParams()
       .set("obiettivoStrategico", this.obiettivoStrategico.codice)
       .set("nome", this.nome)
       .set("responsabilePolitico", this.responsabilePolitico)
       .set("responsabile", this.responsabile)
-      .set("area", this.obiettivoStrategico.area.codice)
+      .set("area", 1)
       .set("tipologia", this.tipologia)
       .set("indicatore", this.indicatore)
       .set("peso", this.peso)
