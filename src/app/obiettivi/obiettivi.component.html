@@ -6,7 +6,7 @@
      <div class="table-div">
         Obiettivi strategici
         <div class="table-empty-space"></div>
-        <table mat-table [dataSource]="dataSourceObiettiviStrat" class="mat-elevation-z8">
+        <table mat-table [dataSource]="obiettiviStrategici" class="mat-elevation-z8">
            <ng-container matColumnDef="codice">
               <th mat-header-cell *matHeaderCellDef> Codice Obiettivo </th>
               <td mat-cell *matCellDef="let element"> {{element.codice}} </td>
@@ -71,10 +71,8 @@
            <ng-container matColumnDef="area">
               <th mat-header-cell *matHeaderCellDef> Area </th>
               <td mat-cell *matCellDef="let element"> {{element.area?.nome}} </td>
-           </ng-container>
-           <ng-container matColumnDef="tipologia">
-              <th mat-header-cell *matHeaderCellDef> Tipologia </th>
-              <td mat-cell *matCellDef="let element"> {{element.tipologia}} </td>
+ *matCellDef="let element"> {{element.area}} </td>
+<td mat-cell *matCellDef="let element"> {{element.tipologia}} </td>
            </ng-container>
            <ng-container matColumnDef="indicatore">
               <th mat-header-cell *matHeaderCellDef> Indicatore </th>

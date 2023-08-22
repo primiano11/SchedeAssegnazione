@@ -4,7 +4,11 @@
   <form #form="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Area Strategica</mat-label>
-      <input matInput [(ngModel)]="areaStrategica" name="areaStrategica" required>
+      <mat-select [(ngModel)]="area" name="area" required>
+        <mat-option *ngFor="let area of listaAree" [value]="area">
+          {{ area?.codice }} - {{ area?.nome }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Tipologia</mat-label>

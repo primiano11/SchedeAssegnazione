@@ -26,9 +26,12 @@ export class ObiettiviComponent {
   constructor(public dialog: MatDialog, private http: HttpClient) {}
 
   readonly OI_URL = "http://localhost:8080/api/obiettivi/getalloi";
+  readonly OS_URL = "http://localhost:8080/api/obiettivi/getallos";
 
-  obiettiviIndividuali: MatTableDataSource<ObiettivoIndividuale> =
-    new MatTableDataSource<ObiettivoIndividuale>();
+  obiettiviIndividuali: MatTableDataSource<ObiettivoIndividuale> = new MatTableDataSource<ObiettivoIndividuale>();
+  obiettiviStrategici: MatTableDataSource<ObiettivoStrategico> = new MatTableDataSource<ObiettivoStrategico>();
+
+
   displayedColumnsIndividuali: string[] = [
     "obiettivoStrategico",
     "codice",
@@ -52,7 +55,7 @@ export class ObiettiviComponent {
     "stakeholder",
     "anno",
   ];
-  dataSourceObiettiviStrat = OBIETTIVISTRATEGICI_DATA;
+
 
   openDialogOs() {
     const dialogRef = this.dialog.open(DialogContentOs);
@@ -76,8 +79,17 @@ export class ObiettiviComponent {
     });
   }
 
+  getOS() {
+    this.http.get<ObiettivoStrategico[]>(this.OS_URL).subscribe((data) => {
+      this.obiettiviStrategici = new MatTableDataSource<ObiettivoStrategico>(
+        data
+      );
+    });
+  }
+
   ngOnInit() {
     this.getOI();
+    this.getOS();
   }
 }
 
@@ -87,19 +99,29 @@ export class ObiettiviComponent {
   styleUrls: ["./dialog-content-os.css"],
 })
 export class DialogContentOs {
-  hide = true;
 
-  codiceObiettivo: number;
-  areaStrategica: string;
+  private readonly SAVE_OS_URL = 'http://localhost:8080/api/obiettivi/saveos';
+  listaAree: Area[] = [];
+
+
+  codice: number;
+  area: Area;
   tipologia: string;
   nome: string;
   presidio: string;
   stakeholder: string;
   anno: number;
 
-  constructor(public dialogRef: MatDialogRef<DialogContentOs>) {
-    this.codiceObiettivo = 1;
-    this.areaStrategica = "";
+  constructor(public dialogRef: MatDialogRef<DialogContentOs>, private http: HttpClient) {
+    this.codice = 0;
+    this.area = {
+      codice: 0,
+      nome: '',
+      tipologia: '',
+      descrizione: '',
+      stakeholder: '',
+      anno: 0
+      };;
     this.tipologia = "";
     this.nome = "";
     this.presidio = "";
@@ -107,12 +129,57 @@ export class DialogContentOs {
     this.anno = 2023;
   }
 
-  aggiungiOs() {}
+  aggiungiOs() {
+
+    const params = new HttpParams()
+    .set("area", this.area.codice)
+    .set("tipologia", this.tipologia)
+    .set("nome", this.nome)
+    .set("presidio", this.presidio)
+    .set("stakeholder", this.stakeholder)
+    .set("anno", this.anno);
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+    }),
+    params: params,
+  };
+
+  this.http.post(this.SAVE_OS_URL, null, httpOptions).subscribe(
+    (response) => {
+      console.log("Risposta POST:", response);
+      this.dialogRef.close();
+    },
+    (error) => {
+      // Gestisci eventuali errori qui.
+      console.error("Errore POST:", error);
+      this.dialogRef.close();
+    }
+  );
+
+  this.dialogRef.close();
+  }
+
+
+  getListaOS(){
+    this.http.get<Area[]>("http://localhost:8080/api/aree/getall").subscribe((data) => {
+      this.listaAree = data;
+    });
+  }
+
+  ngOnInit(){
+    this.getListaOS();
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 }
+
+
+
+
 
 @Component({
   selector: "dialog-content-oi",
@@ -122,6 +189,7 @@ export class DialogContentOs {
 export class DialogContentOi {
 
   private readonly SAVE_OI_URL = 'http://localhost:8080/api/obiettivi/saveoi';
+
 
   hide = true;
   listaDipendenti: Dipendente[] = [];
@@ -203,7 +271,7 @@ export class DialogContentOi {
       .set("indicatore", this.indicatore)
       .set("peso", this.peso)
       .set("anno", this.anno)
-      .set("dipendente", this.dipendente.matricola);
+      .set("dipendente", this.dipendente ? this.dipendente.matricola : '');
 
     const httpOptions = {
       headers: new HttpHeaders({
