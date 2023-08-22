@@ -7,6 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CdkTable } from '@angular/cdk/table';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ObiettivoIndividuale } from '../models/ObiettivoIndividuale';
+import { ObiettivoSchedaDto } from '../models/obiettivoschedaDto';
+import { Area } from '../models/area';
 
 
 @Component({
@@ -109,13 +112,21 @@ export class DialogContentDipendenti {
   matricola: number;
   nome: string;
   cognome: string;
-  unitaOrganizzativa: string;
+  unitaOrganizzativa: Area;
 
   constructor(public dialogRef: MatDialogRef<DialogContentDipendenti>, private http: HttpClient) {
     this.matricola = 1;
     this.nome = '';
     this.cognome = '';
-    this.unitaOrganizzativa = '';
+    this.unitaOrganizzativa = {
+      codice: 0,
+      nome: '',
+      tipologia: '',
+      descrizione: '',
+      stakeholder: '',
+      anno: 0
+      }
+    ;
   }
 
   closeDialog(): void {
@@ -127,7 +138,7 @@ export class DialogContentDipendenti {
     const params = new HttpParams()
     .set('nome', this.nome)
     .set('cognome', this.cognome)
-    .set('unitaOrganizzativa', this.unitaOrganizzativa);
+    .set('unitaOrganizzativa', this.unitaOrganizzativa.codice);
 
   const httpOptions = {
     headers: new HttpHeaders({
@@ -162,93 +173,35 @@ export class DialogContentSchede{
   constructor(public dialogRef: MatDialogRef<DialogContentSchede>, private http: HttpClient, @Optional() @Inject(MAT_DIALOG_DATA) public rowData: any) {
   }
 
- obiettivi: any[] = [
-  {
-    codice: 'O1',
-    area: 'Area X',
-    tipologia: 'Incremento iscritti',
-    nome: 'Miglioramento delle attività di orientamento',
-    presidio: 'Facoltà di Scienze',
-    stakeholder: 'Studenti, docenti, personale',
-    anno: 2023,
-  },
-  {
-    codice: 'O2',
-    area: 'Area X',
-    tipologia: 'Collaborazioni internazionali',
-    nome: 'Potenziamento delle partnership con università estere',
-    presidio: 'Dipartimento di Scienze Politiche',
-    stakeholder: 'Docenti, ricercatori',
-    anno: 2023,
-  },
-  {
-    codice: 'O3',
-    area: 'Area X',
-    tipologia: 'Qualità insegnamento',
-    nome: 'Valutazione dei corsi da parte degli studenti',
-    presidio: 'Facoltà di Economia',
-    stakeholder: 'Studenti, docenti',
-    anno: 2023,
-  },
-  {
-    codice: 'O4',
-    area: 'Area X',
-    tipologia: 'Pubblicazioni scientifiche',
-    nome: 'Incremento delle pubblicazioni in riviste internazionali',
-    presidio: 'Dipartimento di Matematica',
-    stakeholder: 'Ricercatori',
-    anno: 2023,
-  },
-  {
-    codice: 'O5',
-    area: 'Area X',
-    tipologia: 'Inclusione e diversità',
-    nome: 'Promozione di iniziative per studenti con disabilità',
-    presidio: 'Facoltà di Lettere e Filosofia',
-    stakeholder: 'Studenti, personale',
-    anno: 2023,
-  },
-  {
-    codice: 'O6',
-    area: 'Area X',
-    tipologia: 'Finanziamenti esterni',
-    nome: 'Aumento delle richieste di finanziamento da enti esterni',
-    presidio: 'Dipartimento di Fisica',
-    stakeholder: 'Ricercatori',
-    anno: 2023,
-  },
-  {
-    codice: 'O7',
-    area: 'Area X',
-    tipologia: 'Internazionalizzazione',
-    nome: 'Incremento delle opportunità di scambio internazionale per studenti',
-    presidio: 'Facoltà di Giurisprudenza',
-    stakeholder: 'Studenti',
-    anno: 2023,
-  },
-  {
-    codice: 'O8',
-    area: 'Area X',
-    tipologia: 'Collaborazioni interdisciplinari',
-    nome: 'Promozione di progetti di ricerca interdisciplinari',
-    presidio: 'Dipartimento di Scienze Biologiche',
-    stakeholder: 'Ricercatori',
-    anno: 2023,
-  },
-  {
-    codice: 'O9',
-    area: 'Area X',
-    tipologia: 'Tecnologie dell\'informazione',
-    nome: 'Implementazione di nuove tecnologie per la didattica a distanza',
-    presidio: 'Facoltà di Ingegneria',
-    stakeholder: 'Studenti, docenti',
-    anno: 2023,
-  }
-  ];
+  private readonly LOAD_OBIETTIVI_URL = 'http://localhost:8080/api/obiettivi/getoifrommatricola';
+  obiettivi: ObiettivoIndividuale[] = [];
 
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+
+  caricaObiettivi(matricola: number){
+
+    const params = new HttpParams()
+    .set("matricola", matricola)
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+      params: params,
+    };
+
+
+    this.http.get<ObiettivoIndividuale[]>(this.LOAD_OBIETTIVI_URL, httpOptions).subscribe((data) => {
+      this.obiettivi = data;
+    });
+  }
+
+  ngOnInit(){
+    this.caricaObiettivi(this.rowData.matricola);
   }
 
 }

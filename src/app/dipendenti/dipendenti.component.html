@@ -23,7 +23,7 @@
         </ng-container>
         <ng-container matColumnDef="unitaOrganizzativa">
           <th mat-header-cell *matHeaderCellDef> unitaOrganizzativa </th>
-          <td mat-cell *matCellDef="let element"> {{element.unitaOrganizzativa}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.unitaOrganizzativa?.nome}} </td>
         </ng-container>
         <ng-container matColumnDef="scheda">
           <th mat-header-cell *matHeaderCellDef></th>

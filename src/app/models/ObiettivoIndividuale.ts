@@ -1,12 +1,14 @@
+import { ObiettivoStrategico } from './ObiettivoStrategico';
+import { Area } from './area';
 import { Dipendente } from './dipendente';
 
 export interface ObiettivoIndividuale {
-  obiettivoStrategico: string;
+  obiettivoStrategico: ObiettivoStrategico;
   codice: number;
   nome: string;
   responsabilePolitico: string;
   responsabile: string;
-  area: string;
+  area: Area;
   tipologia: string;
   indicatore: string;
   peso: number;

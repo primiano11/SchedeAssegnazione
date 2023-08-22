@@ -1,6 +1,8 @@
+import { Area } from "./area";
+
 export interface ObiettivoStrategico {
   codice: number;
-  area: string;
+  area: Area;
   tipologia: string;
   nome: string;
   presidio: string;

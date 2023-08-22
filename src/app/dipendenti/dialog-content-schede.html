@@ -10,24 +10,16 @@
 <table>
   <thead>
     <tr>
-      <th>Codice</th>
-      <th>Area</th>
-      <th>Tipologia</th>
-      <th>Nome</th>
-      <th>Presidio</th>
-      <th>Stakeholder</th>
-      <th>Anno</th>
+      <th>Obiettivo</th>
+      <th>Peso</th>
+      <th>Risultato Atteso</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let obiettivo of obiettivi">
-      <td>{{ obiettivo.codice }}</td>
-      <td>{{ obiettivo.area }}</td>
-      <td>{{ obiettivo.tipologia }}</td>
+      <td>{{ obiettivo.obiettivoStrategico }}</td>
+      <td>{{ obiettivo.peso }}</td>
       <td>{{ obiettivo.nome }}</td>
-      <td>{{ obiettivo.presidio }}</td>
-      <td>{{ obiettivo.stakeholder }}</td>
-      <td>{{ obiettivo.anno }}</td>
       <!-- Aggiungi altre colonne della riga qui -->
     </tr>
   </tbody>

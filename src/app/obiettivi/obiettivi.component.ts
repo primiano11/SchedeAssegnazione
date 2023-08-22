@@ -11,38 +11,11 @@ import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Dipendente } from "../risorse/risorse.component";
 import { ObiettivoIndividuale } from "../models/ObiettivoIndividuale";
 import { ObiettivoStrategico } from "../models/ObiettivoStrategico";
+import { Area } from "../models/area";
 
 var index = 3;
 
-const OBIETTIVISTRATEGICI_DATA: ObiettivoStrategico[] = [
-  {
-    codice: 1,
-    area: "Area X",
-    tipologia: "Tipologia X",
-    nome: "Obiettivo strategico X",
-    presidio: "Presidio X",
-    stakeholder: "Stakeholder X",
-    anno: 2023,
-  },
-  {
-    codice: 2,
-    area: "Area Y",
-    tipologia: "Tipologia Y",
-    nome: "Obiettivo strategico Y",
-    presidio: "Presidio Y",
-    stakeholder: "Stakeholder Y",
-    anno: 2023,
-  },
-  {
-    codice: 3,
-    area: "Area Z",
-    tipologia: "Tipologia Z",
-    nome: "Obiettivo strategico Z",
-    presidio: "Presidio Z",
-    stakeholder: "Stakeholder Z",
-    anno: 2023,
-  },
-];
+const OBIETTIVISTRATEGICI_DATA: ObiettivoStrategico[] = [];
 
 @Component({
   selector: "app-obiettivi",
@@ -134,20 +107,7 @@ export class DialogContentOs {
     this.anno = 2023;
   }
 
-  aggiungiOs() {
-    index = index + 1;
-
-    const newElement: ObiettivoStrategico = {
-      codice: index,
-      area: this.areaStrategica,
-      tipologia: this.tipologia,
-      nome: this.nome,
-      presidio: this.presidio,
-      stakeholder: this.stakeholder,
-      anno: this.anno,
-    };
-    this.dialogRef.close(newElement);
-  }
+  aggiungiOs() {}
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -165,13 +125,14 @@ export class DialogContentOi {
 
   hide = true;
   listaDipendenti: Dipendente[] = [];
+  listaOS: ObiettivoStrategico[] = [];
 
-  obiettivoStrategico: string;
+  obiettivoStrategico: ObiettivoStrategico;
   codice: number;
   nome: string;
   responsabilePolitico: string;
   responsabile: string;
-  area: string;
+  area: Area;
   tipologia: string;
   indicatore: string;
   peso: number;
@@ -179,20 +140,43 @@ export class DialogContentOi {
   dipendente: Dipendente;
 
   constructor(public dialogRef: MatDialogRef<DialogContentOi>, private http: HttpClient) {
-    this.obiettivoStrategico = "";
+    this.obiettivoStrategico = {
+      codice: 0,
+      area: {
+        codice: 0,
+        nome: '',
+        tipologia: '',
+        descrizione: '',
+        stakeholder: '',
+        anno: 0
+        },
+      tipologia: 'string',
+      nome: '',
+      presidio: '',
+      stakeholder: '',
+      anno: 0
+    }
+    ;
     this.codice = 1;
     this.nome = "";
     this.responsabilePolitico = "";
     this.responsabile = "";
-    this.area = "";
-    this.tipologia = "";
-    this.indicatore = "";
+    this.area = {
+      codice: 0,
+      nome: '',
+      tipologia: '',
+      descrizione: '',
+      stakeholder: '',
+      anno: 0
+      };
+    this.tipologia = '';
+    this.indicatore = ''
     this.peso = 0;
     this.anno = 2023;
     this.dipendente = {matricola: 0,
-      nome: "",
-      cognome: "",
-      unitaOrganizzativa: ""}
+      nome: '',
+      cognome: '',
+      unitaOrganizzativa: ''}
   }
 
   getListaDipendenti(){
@@ -201,15 +185,21 @@ export class DialogContentOi {
     });
   }
 
-  aggiungiOi() {
-    index = index + 1;
+  getListaOS(){
+    this.http.get<ObiettivoStrategico[]>("http://localhost:8080/api/obiettivi/getallos").subscribe((data) => {
+      this.listaOS = data;
+    });
+  }
+
+
+  aggiungiOi(){
 
     const params = new HttpParams()
-      .set("obiettivoStrategico", this.obiettivoStrategico)
+      .set("obiettivoStrategico", this.obiettivoStrategico.codice)
       .set("nome", this.nome)
       .set("responsabilePolitico", this.responsabilePolitico)
       .set("responsabile", this.responsabile)
-      .set("area", this.area)
+      .set("area", this.obiettivoStrategico.area.codice)
       .set("tipologia", this.tipologia)
       .set("indicatore", this.indicatore)
       .set("peso", this.peso)
@@ -226,10 +216,50 @@ export class DialogContentOi {
     this.http.post(this.SAVE_OI_URL, null, httpOptions).subscribe(
       (response) => {
         console.log("Risposta POST:", response);
+        this.dialogRef.close();
       },
       (error) => {
         // Gestisci eventuali errori qui.
         console.error("Errore POST:", error);
+        this.dialogRef.close();
+      }
+    );
+
+    this.dialogRef.close();
+
+  }
+
+
+  aggiungiOai() {
+
+    const params = new HttpParams()
+      .set("obiettivoStrategico", this.obiettivoStrategico.codice)
+      .set("nome", this.nome)
+      .set("responsabilePolitico", this.responsabilePolitico)
+      .set("responsabile", this.responsabile)
+      .set("area", this.obiettivoStrategico.area.codice)
+      .set("tipologia", this.tipologia)
+      .set("indicatore", this.indicatore)
+      .set("peso", this.peso)
+      .set("anno", this.anno)
+      .set("dipendente", this.dipendente.matricola);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+      params: params,
+    };
+
+    this.http.post(this.SAVE_OI_URL, null, httpOptions).subscribe(
+      (response) => {
+        console.log("Risposta POST:", response);
+        this.dialogRef.close();
+      },
+      (error) => {
+        // Gestisci eventuali errori qui.
+        console.error("Errore POST:", error);
+        this.dialogRef.close();
       }
     );
 
@@ -242,5 +272,6 @@ export class DialogContentOi {
 
   ngOnInit() {
     this.getListaDipendenti();
+    this.getListaOS();
   }
 }

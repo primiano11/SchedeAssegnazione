@@ -5,45 +5,37 @@
     <mat-form-field appearance="outline">
       <mat-label>Obiettivo Strategico</mat-label>
       <mat-select [(ngModel)]="obiettivoStrategico" name="obiettivoStrategico" required>
-        <mat-option value="opzione 1">Opzione 1</mat-option>
-        <mat-option value="opzione 2">Opzione 2</mat-option>
-        <mat-option value="opzione 3">Opzione 3</mat-option>
+        <mat-option *ngFor="let obiettivo of listaOS" [value]="obiettivo">
+          {{ obiettivo?.codice }} - {{ obiettivo?.nome }}
+        </mat-option>
       </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Codice</mat-label>
-      <input matInput [(ngModel)]="codice" name="codice" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
       <input matInput [(ngModel)]="nome" name="nome" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>responsabilePolitico</mat-label>
+      <mat-label>Responsabile Politico</mat-label>
       <input matInput [(ngModel)]="responsabilePolitico" name="responsabilePolitico" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>responsabile</mat-label>
+      <mat-label>Responsabile</mat-label>
       <input matInput [(ngModel)]="responsabile" name="responsabile" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>area</mat-label>
-      <input matInput [(ngModel)]="area" name="area" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>tipologia</mat-label>
+      <mat-label> Tipologia</mat-label>
       <input matInput [(ngModel)]="tipologia" name="tipologia" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>indicatore</mat-label>
+      <mat-label>Indicatore</mat-label>
       <input matInput [(ngModel)]="indicatore" name="indicatore" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>peso</mat-label>
+      <mat-label>Peso</mat-label>
       <input matInput [(ngModel)]="peso" name="peso" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>anno</mat-label>
+      <mat-label>Anno</mat-label>
       <input matInput [(ngModel)]="anno" name="anno" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
