@@ -33,3 +33,10 @@
 .table-empty-space{
   height: 15px;
 }
+
+.scheda-button {
+  background: none;
+  border: none;
+  padding: 0; /* Opzionale: rimuove il padding del pulsante se desiderato */
+  cursor: pointer; /* Mostra il cursore come puntatore su hover */
+}

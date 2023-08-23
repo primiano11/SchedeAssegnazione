@@ -17,11 +17,13 @@ import { Area } from '../models/area';
 export class AreeComponent {
 
     readonly ROOT_URL = "http://localhost:8080/api/aree/getall";
+    readonly DELETE_URL = "http://localhost:8080/api/aree/delete";
+
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
   aree: MatTableDataSource<Area> = new MatTableDataSource<Area>();
-  displayedColumnsAree: string[] = ['codice', 'nome', 'tipologia', 'descrizione', 'stakeholder', 'anno'];
+  displayedColumnsAree: string[] = ['codice', 'nome', 'tipologia', 'descrizione', 'stakeholder', 'anno', 'update', 'elimina'];
 
 
   ngOnInit() {
@@ -43,6 +45,46 @@ export class AreeComponent {
       this.aree = new MatTableDataSource<Area>(data);
     });
   }
+
+
+  openDialogUpdateArea(rowData: any): void {
+    const dialogRef = this.dialog.open(DialogContentUpdateAree, { data: rowData});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAree();
+    });
+  }
+
+  deleteArea(element: any): void {
+    if (window.confirm("Sei sicuro di voler eliminare l'area " + element.nome + "?")) {
+
+    const params = new HttpParams().set('codice', element.codice);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: params,
+    };
+
+    this.http.post(this.DELETE_URL, null, httpOptions).subscribe(
+      (response) => {
+        // Gestisci la risposta del server qui, se necessario.
+        console.log('Risposta POST:', response);
+        this.getAree();
+
+      },
+      (error) => {
+        // Gestisci eventuali errori qui.
+        console.error('Errore POST:', error);
+        this.getAree();
+
+      }
+    );
+
+    this.getAree();
+
+  }}
 
 }
 
@@ -97,6 +139,74 @@ export class DialogContentAree {
     };
 
     this.http.post(this.SAVE_DIPENDENTE_URL, null, httpOptions).subscribe(
+      (response) => {
+        // Gestisci la risposta del server qui, se necessario.
+        console.log('Risposta POST:', response);
+      },
+      (error) => {
+        // Gestisci eventuali errori qui.
+        console.error('Errore POST:', error);
+      }
+    );
+
+    this.dialogRef.close();
+  }
+
+}
+
+
+@Component({
+  selector: 'dialog-content-update-aree',
+  templateUrl: './dialog-content-update-aree.html',
+  styleUrls: ['./dialog-content-update-aree.css'],
+})
+export class DialogContentUpdateAree {
+
+
+
+  private readonly UPDATE_AREE_URL = 'http://localhost:8080/api/aree/update';
+
+
+  hide = true;
+
+  codice: number;
+  nome: string;
+  tipologia: string;
+  descrizione: string;
+  stakeholder: string;
+  anno: number;
+
+  constructor(public dialogRef: MatDialogRef<DialogContentAree>, private http: HttpClient, @Inject(MAT_DIALOG_DATA) public rowData: any) {
+    this.codice = rowData.codice;
+    this.nome = rowData.nome;
+    this.tipologia = rowData.tipologia;
+    this.descrizione = rowData.descrizione;
+    this.stakeholder = rowData.stakeholder;
+    this.anno = rowData.anno;
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  aggiornaDip() {
+
+    const params = new HttpParams()
+    .set('codice', this.codice)
+    .set('nome', this.nome)
+    .set('tipologia', this.tipologia)
+    .set('descrizione', this.descrizione)
+    .set('stakeholder', this.stakeholder)
+    .set('anno', this.anno)
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+    params: params,
+  };
+
+    this.http.post(this.UPDATE_AREE_URL, null, httpOptions).subscribe(
       (response) => {
         // Gestisci la risposta del server qui, se necessario.
         console.log('Risposta POST:', response);

@@ -12,7 +12,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Unità Organizzativa</mat-label>
-      <input matInput [(ngModel)]="unitaOrganizzativa" name="unitaOrganizzativa" required>
+      <mat-select [(ngModel)]="unitaOrganizzativa" name="unitaOrganizzativa" required>
+        <mat-option *ngFor="let unitaOrganizzativa of listaUnita" [value]="unitaOrganizzativa">
+          {{ unitaOrganizzativa?.codice }} - {{ unitaOrganizzativa?.nome }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <div class="dialog-buttons">

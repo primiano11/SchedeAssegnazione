@@ -105,6 +105,7 @@ export class DialogContentDipendenti {
 
 
   private readonly SAVE_DIPENDENTE_URL = 'http://localhost:8080/api/dipendenti/save';
+  listaUnita: Area[] = [];
 
 
   hide = true;
@@ -159,6 +160,17 @@ export class DialogContentDipendenti {
     );
 
     this.dialogRef.close();
+  }
+
+
+  getListaUnita(){
+    this.http.get<Area[]>("http://localhost:8080/api/aree/getall").subscribe((data) => {
+      this.listaUnita = data;
+    });
+  }
+
+  ngOnInit(){
+    this.getListaUnita();
   }
 
 }
@@ -218,7 +230,7 @@ export class DialogContentUpdateDipendenti {
 
 
   private readonly UPDATE_DIPENDENTE_URL = 'http://localhost:8080/api/dipendenti/update';
-
+  listaUnita: Area[] = [];
 
   hide = true;
 
@@ -265,6 +277,16 @@ export class DialogContentUpdateDipendenti {
     );
 
     this.dialogRef.close();
+  }
+
+  getListaUnita(){
+    this.http.get<Area[]>("http://localhost:8080/api/aree/getall").subscribe((data) => {
+      this.listaUnita = data;
+    });
+  }
+
+  ngOnInit(){
+    this.getListaUnita();
   }
 
 }

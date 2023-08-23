@@ -162,14 +162,14 @@ export class DialogContentOs {
   }
 
 
-  getListaOS(){
+  getListaAree(){
     this.http.get<Area[]>("http://localhost:8080/api/aree/getall").subscribe((data) => {
       this.listaAree = data;
     });
   }
 
   ngOnInit(){
-    this.getListaOS();
+    this.getListaAree();
   }
 
   closeDialog(): void {

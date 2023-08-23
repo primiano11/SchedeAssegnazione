@@ -1,5 +1,5 @@
 <div fxLayoutAlign="stretch" fxLayout="column" class="login-form">
-  <h2>Aggiorna Dipendente</h2>
+  <h2>Aggiorna Area</h2>
 
   <form #form="ngForm">
     <mat-form-field appearance="outline">
@@ -7,16 +7,20 @@
       <input matInput [(ngModel)]="nome" name="nome" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Cognome</mat-label>
-      <input matInput [(ngModel)]="cognome" name="cognome" required>
+      <mat-label>Tipologia</mat-label>
+      <input matInput [(ngModel)]="tipologia" name="tipologia" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Unità Organizzativa</mat-label>
-      <mat-select [(ngModel)]="unitaOrganizzativa" name="unitaOrganizzativa" required>
-        <mat-option *ngFor="let unitaOrganizzativa of listaUnita" [value]="unitaOrganizzativa">
-          {{ unitaOrganizzativa?.codice }} - {{ unitaOrganizzativa?.nome }}
-        </mat-option>
-      </mat-select>
+      <mat-label>Descrizione</mat-label>
+      <input matInput [(ngModel)]="descrizione" name="descrizione" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Stakeholder</mat-label>
+      <input matInput [(ngModel)]="stakeholder" name="stakeholder" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Anno</mat-label>
+      <input matInput [(ngModel)]="anno" name="anno" required>
     </mat-form-field>
 
     <div class="dialog-buttons">

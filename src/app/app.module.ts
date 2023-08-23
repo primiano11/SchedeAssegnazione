@@ -21,7 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { DialogContentDip, RisorseComponent } from './risorse/risorse.component';
-import { AreeComponent, DialogContentAree } from './aree/aree.component';
+import { AreeComponent, DialogContentAree, DialogContentUpdateAree } from './aree/aree.component';
 import { DialogContentOi, DialogContentOs, ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { RouterModule } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
@@ -51,7 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
     DipendentiComponent,
     DialogContentDipendenti,
     DialogContentSchede,
-    DialogContentUpdateDipendenti
+    DialogContentUpdateDipendenti,
+    DialogContentUpdateAree
   ],
   imports: [
     BrowserModule,
