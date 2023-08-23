@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, Optional, Inject } from "@angular/core";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Dipendente } from "../risorse/risorse.component";
@@ -43,7 +43,8 @@ export class ObiettiviComponent {
     "indicatore",
     "peso",
     "anno",
-    "dipendente"
+    "dipendente",
+    "assegna"
   ];
 
   displayedColumnsStrategici: string[] = [
@@ -84,6 +85,14 @@ export class ObiettiviComponent {
       this.obiettiviStrategici = new MatTableDataSource<ObiettivoStrategico>(
         data
       );
+    });
+  }
+
+  openDialogAssegnaOI(rowData: any): void {
+    const dialogRef = this.dialog.open(DialogContentAssegnazioneOi, { data: rowData});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getOI();
     });
   }
 
@@ -200,7 +209,6 @@ export class DialogContentOi {
   nome: string;
   responsabilePolitico: string;
   responsabile: string;
-  area: Area;
   tipologia: string;
   indicatore: string;
   peso: number;
@@ -229,14 +237,6 @@ export class DialogContentOi {
     this.nome = "";
     this.responsabilePolitico = "";
     this.responsabile = "";
-    this.area = {
-      codice: 0,
-      nome: '',
-      tipologia: '',
-      descrizione: '',
-      stakeholder: '',
-      anno: 0
-      };
     this.tipologia = '';
     this.indicatore = ''
     this.peso = 0;
@@ -261,12 +261,15 @@ export class DialogContentOi {
 
   aggiungiOi() {
 
+    console.log('Obiettivo Strategico:', this.obiettivoStrategico);
+    console.log('Dip:', this.dipendente);
+
     const params = new HttpParams()
       .set("obiettivoStrategico", this.obiettivoStrategico.codice)
       .set("nome", this.nome)
       .set("responsabilePolitico", this.responsabilePolitico)
       .set("responsabile", this.responsabile)
-      .set("area", 1)
+      .set("area", this.obiettivoStrategico.area.codice)
       .set("tipologia", this.tipologia)
       .set("indicatore", this.indicatore)
       .set("peso", this.peso)
@@ -302,5 +305,83 @@ export class DialogContentOi {
   ngOnInit() {
     this.getListaDipendenti();
     this.getListaOS();
+  }
+}
+
+
+@Component({
+  selector: "dialog-content-assegnaoi",
+  templateUrl: "./dialog-content-assegnaoi.html",
+  styleUrls: ["./dialog-content-assegnaoi.css"],
+})
+export class DialogContentAssegnazioneOi {
+
+  private readonly SAVE_OI_URL = 'http://localhost:8080/api/obiettivi/saveoi';
+
+
+  listaDipendentiValidi: Dipendente[] = [];
+
+  dipendente: Dipendente;
+
+  constructor(public dialogRef: MatDialogRef<DialogContentOi>, private http: HttpClient, @Inject(MAT_DIALOG_DATA) public rowData: any) {
+    this.dipendente = {matricola: 0,
+      nome: '',
+      cognome: '',
+      unitaOrganizzativa: ''}
+  }
+
+
+  getListaDipendenti(codice: number){
+
+
+    const params = new HttpParams()
+    .set("codice", codice)
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+      params: params,
+    };
+
+
+    this.http.get<Dipendente[]>("http://localhost:8080/api/dipendenti/getbyarea", httpOptions).subscribe((data) => {
+      this.listaDipendentiValidi = data;
+    });
+  }
+
+
+  assegnaOi() {
+
+    const params = new HttpParams()
+    .set("codice", this.rowData.codice)
+    .set('matricola', this.dipendente ? this.dipendente.matricola : '')
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+      params: params,
+    };
+
+    this.http.post("http://localhost:8080/api/obiettivi/assegnaoi", null, httpOptions).subscribe(
+      (response) => {
+        console.log('Risposta POST:', response);
+      },
+      (error) => {
+        console.error('Errore POST:', error);
+      }
+    );
+
+    this.dialogRef.close();
+
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  ngOnInit() {
+    this.getListaDipendenti(this.rowData.area.codice);
   }
 }

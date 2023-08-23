@@ -22,7 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { DialogContentDip, RisorseComponent } from './risorse/risorse.component';
 import { AreeComponent, DialogContentAree, DialogContentUpdateAree } from './aree/aree.component';
-import { DialogContentOi, DialogContentOs, ObiettiviComponent } from './obiettivi/obiettivi.component';
+import { DialogContentAssegnazioneOi, DialogContentOi, DialogContentOs, ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { RouterModule } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -52,7 +52,8 @@ import { HttpClientModule } from '@angular/common/http';
     DialogContentDipendenti,
     DialogContentSchede,
     DialogContentUpdateDipendenti,
-    DialogContentUpdateAree
+    DialogContentUpdateAree,
+    DialogContentAssegnazioneOi
   ],
   imports: [
     BrowserModule,

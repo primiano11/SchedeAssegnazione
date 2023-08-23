@@ -237,7 +237,7 @@ export class DialogContentUpdateDipendenti {
   matricola: number;
   nome: string;
   cognome: string;
-  unitaOrganizzativa: string;
+  unitaOrganizzativa: Area;
 
   constructor(public dialogRef: MatDialogRef<DialogContentDipendenti>, private http: HttpClient, @Inject(MAT_DIALOG_DATA) public rowData: any) {
     this.matricola = rowData.matricola;
@@ -256,7 +256,7 @@ export class DialogContentUpdateDipendenti {
     .set('matricola', this.matricola)
     .set('nome', this.nome)
     .set('cognome', this.cognome)
-    .set('unitaOrganizzativa', this.unitaOrganizzativa);
+    .set('unitaOrganizzativa', this.unitaOrganizzativa.codice);
 
   const httpOptions = {
     headers: new HttpHeaders({
