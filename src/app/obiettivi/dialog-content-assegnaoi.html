@@ -5,7 +5,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Dipendente</mat-label>
       <mat-select [(ngModel)]="dipendente" name="dipendente">
-        <mat-option>-</mat-option>
+        <mat-option value=""> NESSUN DIPENDENTE </mat-option>
         <mat-option *ngFor="let dipendente of listaDipendentiValidi" [value]="dipendente">
           {{ dipendente?.matricola }} - {{ dipendente?.nome }} {{ dipendente?.cognome }}
         </mat-option>
@@ -13,7 +13,7 @@
     </mat-form-field>
 
     <div class="dialog-buttons">
-      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="assegnaOi()">Aggiungi</button>
+      <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="assegnaOi()">Assegna</button>
       <button mat-button color="warn" (click)="closeDialog()">Annulla</button>
     </div>
   </form>

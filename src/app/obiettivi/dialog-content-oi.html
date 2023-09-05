@@ -38,15 +38,6 @@
       <mat-label>Anno</mat-label>
       <input matInput [(ngModel)]="anno" name="anno" required>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Dipendente</mat-label>
-      <mat-select [(ngModel)]="dipendente" name="dipendente">
-        <mat-option>-</mat-option>
-        <mat-option *ngFor="let dipendente of listaDipendenti" [value]="dipendente">
-          {{ dipendente?.matricola }} - {{ dipendente?.nome }} {{ dipendente?.cognome }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
 
     <div class="dialog-buttons">
       <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiOi()">Aggiungi</button>

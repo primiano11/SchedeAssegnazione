@@ -61,7 +61,9 @@ export class ObiettiviComponent {
   openDialogOs() {
     const dialogRef = this.dialog.open(DialogContentOs);
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe(result => {
+      this.getOS();
+    });
   }
 
   openDialogOi() {
