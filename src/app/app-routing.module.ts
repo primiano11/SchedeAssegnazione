@@ -8,16 +8,17 @@ import { AreeComponent } from './aree/aree.component';
 import { ObiettiviComponent } from './obiettivi/obiettivi.component';
 import { DipendentiComponent } from './dipendenti/dipendenti.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AuthGuard } from './utils/authservice';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'home', component:HomeComponent, children: [
     {path: '', redirectTo: 'welcome', pathMatch: 'full' },
-    {path: 'risorse', component:RisorseComponent},
-    {path: 'aree', component:AreeComponent},
-    {path: 'obiettivi', component:ObiettiviComponent},
-    {path: 'dipendenti', component:DipendentiComponent},
-    {path: 'welcome', component:WelcomeComponent}
+    {path: 'aree', component:AreeComponent, canActivate: [AuthGuard]},
+    {path: 'obiettivi', component:ObiettiviComponent, canActivate: [AuthGuard]},
+    {path: 'dipendenti', component:DipendentiComponent, canActivate: [AuthGuard]},
+    {path: 'welcome', component:WelcomeComponent, canActivate: [AuthGuard]}
   ]},
   {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},

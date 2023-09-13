@@ -6,10 +6,10 @@
            <img src="https://www2.unimol.it/wp-content/uploads/2021/03/Unimol-logo.png" alt="Logo Unimol">
         </div>
         <div class="empty-space"></div>
-        <p mat-list-item routerLink="/home/aree" routerLinkActive="active" class="custom-link">Aree</p>
-        <p mat-list-item routerLink="/home/obiettivi" routerLinkActive="active" class="custom-link">Obiettivi</p>
-        <p mat-list-item routerLink="/home/dipendenti" routerLinkActive="active" class="custom-link">Dipendenti</p>
-     </mat-nav-list>
+        <mat-list-item role="listitem" routerLink="/home/aree" routerLinkActive="active">Aree</mat-list-item>
+        <mat-list-item role="listitem" routerLink="/home/obiettivi" routerLinkActive="active">Obiettivi</mat-list-item>
+        <mat-list-item role="listitem" routerLink="/home/dipendenti" routerLinkActive="active">Dipendenti</mat-list-item>
+      </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
      <router-outlet></router-outlet>

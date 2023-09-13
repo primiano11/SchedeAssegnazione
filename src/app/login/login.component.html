@@ -4,19 +4,19 @@
      <mat-toolbar color="primary">Accesso</mat-toolbar>
      <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
         <mat-form-field>
-           <mat-label>Nome utente</mat-label>
-           <input matInput placeholder="Inserisci il tuo nome utente" />
+           <mat-label>Email</mat-label>
+           <input matInput [(ngModel)]="email" name="email" placeholder="Inserisci la tua email" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <input matInput [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <button mat-raised-button color="primary">Accedi</button>
+        <button mat-raised-button color="primary" (click)="login()">Accedi</button>
      </form>
   </mat-card>
-  <p class="test">Non hai un account? <a href="#">Registrati!</a></p>
+  <p class="test">Non hai un account? <a href="#" routerLink="/register" routerLinkActive="active">Registrati!</a></p>
 </div>
 </div>
