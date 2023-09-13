@@ -30,6 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogContentDipendenti, DipendentiComponent, DialogContentSchede, DialogContentUpdateDipendenti } from './dipendenti/dipendenti.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -53,7 +54,8 @@ import { HttpClientModule } from '@angular/common/http';
     DialogContentSchede,
     DialogContentUpdateDipendenti,
     DialogContentUpdateAree,
-    DialogContentAssegnazioneOi
+    DialogContentAssegnazioneOi,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
