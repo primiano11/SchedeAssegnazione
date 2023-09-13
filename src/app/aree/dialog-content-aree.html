@@ -14,6 +14,10 @@
       <mat-label>Descrizione</mat-label>
       <input matInput [(ngModel)]="descrizione" name="descrizione" required>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Stakeholder</mat-label>
+      <input matInput [(ngModel)]="stakeholder" name="stakeholder" required>
+    </mat-form-field>
 
     <div class="dialog-buttons">
       <button mat-button color="primary" type="submit" [disabled]="form.invalid" (click)="aggiungiArea()">Aggiungi</button>

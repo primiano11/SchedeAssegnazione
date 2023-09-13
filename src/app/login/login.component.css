@@ -1,12 +1,33 @@
-.main-div {
+.main-div-log {
   background-image: url(../resources/logo.png);
   background-repeat:no-repeat;
   background-position: center center;
   background-size: 50%;
-  background-color:rgb(116, 116, 116);
-  padding: 0%;
+  background-color:rgb(0, 1, 87);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Impedisce che il contenuto si sposta fuori dalla vista */
 }
 
 .login-form {
-  padding: 20px;
+  padding: 2%;
+}
+
+
+.div-form {
+  text-align: center; /* Opzionale: allinea il contenuto al centro orizzontalmente */
+  align-items: center;
+  height: 50%;
+  width: 40%;
+}
+
+.test {
+  padding: 3%;
+  color: white;
+  font-size: 150%;
+}
+
+.test a {
+  color: white;
 }

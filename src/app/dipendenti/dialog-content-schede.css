@@ -4,7 +4,7 @@
   height: 297mm; /* Altezza del foglio A4 */
   max-width: calc(100vw - 32px); /* Massima larghezza consentita per adattarsi a schermi più piccoli */
   max-height: calc(100vh - 32px); /* Massima altezza consentita per adattarsi a schermi più piccoli */
-  padding: 24px;
+  padding: 7%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,13 +14,16 @@
 }
 
 .dialog-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .dialog-content {
   margin-bottom: 16px;
+  padding: 4%;
+  font-size: 1rem;
 }
 
 table {
@@ -48,4 +51,6 @@ tbody td {
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  bottom: 3%;
 }
