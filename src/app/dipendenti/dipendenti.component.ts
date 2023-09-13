@@ -10,7 +10,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ObiettivoIndividuale } from '../models/ObiettivoIndividuale';
 import { ObiettivoSchedaDto } from '../models/obiettivoschedaDto';
 import { Area } from '../models/area';
-
+import jspdf from 'jspdf'
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-dipendenti',
@@ -212,8 +213,20 @@ export class DialogContentSchede{
     });
   }
 
-  ngOnInit(){
-    this.caricaObiettivi(this.rowData.matricola);
+
+  convertToPDF() {
+    const doc = new jspdf();
+
+    // Prendi l'elemento HTML che desideri convertire in PDF
+    const element = document.getElementById('htmlToConvert') as HTMLElement;
+
+    // Converti l'elemento HTML in PDF
+    doc.html(element, {
+      callback: (doc) => {
+        // Salva il documento PDF
+        doc.save('converted.pdf');
+      }
+    });
   }
 
 }

@@ -6,7 +6,7 @@ import { CanActivate, Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedIn = false;
+  private isLoggedIn = true;
 
   login() {
     this.isLoggedIn = true;
