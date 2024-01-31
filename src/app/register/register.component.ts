@@ -24,14 +24,19 @@ export class RegisterComponent {
   username: string;
   email: string;
   password: string;
+  confirm: string;
 
   constructor( private http: HttpClient, private router: Router) {
     this.username = '';
     this.email = '';
     this.password = '';
+    this.confirm = '';
   }
 
   register(){
+    if(this.confirm != this.password){
+      window.alert("Le password non corrispondono")
+    } else if(window.confirm("Sei sicuro di voler registrare l'utente " + this.username + "?")){
     const params = new HttpParams()
     .set('username', this.username)
     .set('email', this.email)
@@ -53,8 +58,7 @@ export class RegisterComponent {
 
 
         if(response.status == true){
-          window.alert("Ora esegui il login");
-          this.router.navigate(['/login']);
+          window.alert("Utente registrato con successo");
         }
         console.log('Risposta POST:', response.error_msg);
       },
@@ -63,6 +67,6 @@ export class RegisterComponent {
         console.error('Errore POST:', error);
       }
     );
-  }
+  }}
 
 }

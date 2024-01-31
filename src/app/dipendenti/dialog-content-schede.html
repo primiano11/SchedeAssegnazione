@@ -1,5 +1,6 @@
 <mat-card class="dialog-container">
-  <div id="htmlToConvert">
+  <div id="htmlToConvert" #htmlToConvert>
+  <div class="table-empty-space"></div>
   <h2 class="dialog-title">Scheda di Assegnazione degli obiettivi individuali 2023</h2>
   <div class="dialog-content">
     <p><strong>Nome:</strong> {{ rowData.nome }}</p>
@@ -8,7 +9,7 @@
     <p><strong>Unità Organizzativa:</strong> {{ rowData.unitaOrganizzativa?.nome }}</p>
   </div>
 
-<table>
+<table class="obiettivi-table">
   <thead>
     <tr>
       <th>Obiettivo</th>
@@ -19,7 +20,7 @@
   <tbody>
     <tr *ngFor="let obiettivo of obiettivi">
       <td>{{ obiettivo.obiettivoStrategico.nome }}</td>
-      <td>{{ obiettivo.peso }}</td>
+      <td>{{ obiettivo.peso }}%</td>
       <td>{{ obiettivo.nome }}</td>
       <!-- Aggiungi altre colonne della riga qui -->
     </tr>

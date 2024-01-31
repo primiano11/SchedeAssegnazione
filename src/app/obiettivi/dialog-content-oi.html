@@ -6,7 +6,7 @@
       <mat-label>Obiettivo Strategico</mat-label>
       <mat-select [(ngModel)]="obiettivoStrategico" name="obiettivoStrategico" required>
         <mat-option *ngFor="let obiettivo of listaOS" [value]="obiettivo">
-          {{ obiettivo?.codice }} - {{ obiettivo?.nome }}
+          {{ obiettivo?.area?.nome }} - {{ obiettivo?.codice }} - {{ obiettivo?.nome }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -15,16 +15,8 @@
       <input matInput [(ngModel)]="nome" name="nome" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Responsabile Politico</mat-label>
-      <input matInput [(ngModel)]="responsabilePolitico" name="responsabilePolitico" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
       <mat-label>Responsabile</mat-label>
       <input matInput [(ngModel)]="responsabile" name="responsabile" required>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Tipologia</mat-label>
-      <input matInput [(ngModel)]="tipologia" name="tipologia" required>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Indicatore</mat-label>

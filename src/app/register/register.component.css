@@ -1,9 +1,9 @@
 .main-div-reg {
-  background-image: url(../resources/logo.png);
+  background-image: url(../resources/logo2.png);
   background-repeat:no-repeat;
-  background-position: center center;
-  background-size: 50%;
-  background-color:rgb(0, 1, 87);
+  background-position: center 8%;
+  background-size: 10%;
+  background-color: rgb(219, 219, 219);
   display: flex;
   justify-content: center;
   align-items: center;

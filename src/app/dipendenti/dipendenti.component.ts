@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Inject} from '@angular/core';
+import { Component, OnInit, Optional, Inject, ViewChild, ElementRef} from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Dipendente } from '../models/dipendente';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ObiettivoIndividuale } from '../models/ObiettivoIndividuale';
 import { ObiettivoSchedaDto } from '../models/obiettivoschedaDto';
 import { Area } from '../models/area';
-import jspdf from 'jspdf'
+import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 
 @Component({
@@ -183,6 +183,9 @@ export class DialogContentDipendenti {
   styleUrls: ['./dialog-content-schede.css'],
 })
 export class DialogContentSchede{
+
+  @ViewChild('htmlToConvert', {static: false}) el!: ElementRef;
+
   constructor(public dialogRef: MatDialogRef<DialogContentSchede>, private http: HttpClient, @Optional() @Inject(MAT_DIALOG_DATA) public rowData: any) {
   }
 
@@ -215,18 +218,51 @@ export class DialogContentSchede{
 
 
   convertToPDF() {
-    const doc = new jspdf();
 
-    // Prendi l'elemento HTML che desideri convertire in PDF
-    const element = document.getElementById('htmlToConvert') as HTMLElement;
-
-    // Converti l'elemento HTML in PDF
-    doc.html(element, {
-      callback: (doc) => {
-        // Salva il documento PDF
-        doc.save('converted.pdf');
+    let doc = new jsPDF('p', 'pt', 'a4');
+    doc.html(this.el.nativeElement,{
+      callback: (doc)=> {
+        this.addSignatureSegment(doc);
+        doc.save("demo.pdf");
       }
     });
+  }
+
+  addSignatureSegment(doc: jsPDF) {
+    const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 30;
+  const lineSpacing = 70; // Distanza tra le linee delle firme
+  const textY1 = pageHeight - margin - lineSpacing; // Posizione verticale della prima firma
+  const textY2 = pageHeight - margin; // Posizione verticale della seconda firma
+
+  const imageWidth = 100; // Larghezza dell'immagine
+  const imageHeight = 60; // Altezza dell'immagine
+  const imageX = pageWidth - margin - imageWidth; // Posizione orizzontale dell'immagine
+  const imageY = margin;
+  // Disegna la prima linea di firma
+  doc.setDrawColor(0); // Colore della linea (nero)
+  doc.setLineWidth(1); // Spessore della linea (1 punto)
+  doc.line(margin, pageHeight - margin - lineSpacing, pageWidth - 300, pageHeight - margin - lineSpacing); // Prima linea orizzontale
+
+  // Aggiungi il testo "Firma 1" sopra la prima linea
+  doc.setFontSize(12);
+  doc.text('Firma Responsabile', 30, textY1 + 15); // Testo centrato per la prima firma
+
+  // Disegna la seconda linea di firma
+  doc.setDrawColor(0); // Colore della linea (nero)
+  doc.setLineWidth(1); // Spessore della linea (1 punto)
+  doc.line(margin, pageHeight - margin - 5, pageWidth - 300, pageHeight - margin - 5); // Seconda linea orizzontale
+
+  // Aggiungi il testo "Firma 2" sopra la seconda linea
+  doc.setFontSize(12);
+  doc.text('Firma Dipendente', 30, textY2 + 15 - 5) ;
+
+  doc.addImage('../resources/logo2.png', 'JPEG', imageX, imageY, imageWidth, imageHeight);
+  }
+
+  ngOnInit(){
+    this.caricaObiettivi(this.rowData.matricola);
   }
 
 }

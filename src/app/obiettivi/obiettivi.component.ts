@@ -12,6 +12,8 @@ import { Dipendente } from "../risorse/risorse.component";
 import { ObiettivoIndividuale } from "../models/ObiettivoIndividuale";
 import { ObiettivoStrategico } from "../models/ObiettivoStrategico";
 import { Area } from "../models/area";
+import { MatPaginator } from '@angular/material/paginator';
+import { ViewChild } from '@angular/core';
 
 var index = 3;
 
@@ -25,10 +27,18 @@ const OBIETTIVISTRATEGICI_DATA: ObiettivoStrategico[] = [];
 export class ObiettiviComponent {
   constructor(public dialog: MatDialog, private http: HttpClient) {}
 
+  @ViewChild('paginatorStrategici') paginatorStrategici!: MatPaginator;
+  @ViewChild('paginatorIndividuali') paginatorIndividuali!: MatPaginator;
+
+
   readonly OI_URL = "http://localhost:8080/api/obiettivi/getalloi";
   readonly OS_URL = "http://localhost:8080/api/obiettivi/getallos";
+  readonly DELETE_OI = "http://localhost:8080/api/obiettivi/deleteoi";
+  readonly DELETE_OS = "http://localhost:8080/api/obiettivi/deleteos";
 
-  obiettiviIndividuali: MatTableDataSource<ObiettivoIndividuale> = new MatTableDataSource<ObiettivoIndividuale>();
+
+
+  obiettiviIndividuali: MatTableDataSource<ObiettivoIndividuale> = new MatTableDataSource<ObiettivoIndividuale>([]);
   obiettiviStrategici: MatTableDataSource<ObiettivoStrategico> = new MatTableDataSource<ObiettivoStrategico>();
 
 
@@ -36,25 +46,23 @@ export class ObiettiviComponent {
     "obiettivoStrategico",
     "codice",
     "nome",
-    "responsabilePolitico",
     "responsabile",
     "area",
-    "tipologia",
     "indicatore",
     "peso",
     "anno",
     "dipendente",
-    "assegna"
+    "assegna",
+    "elimina"
   ];
 
   displayedColumnsStrategici: string[] = [
     "codice",
     "area",
-    "tipologia",
     "nome",
-    "presidio",
     "stakeholder",
     "anno",
+    "elimina"
   ];
 
 
@@ -74,21 +82,82 @@ export class ObiettiviComponent {
     });
   }
 
-  getOI() {
-    this.http.get<ObiettivoIndividuale[]>(this.OI_URL).subscribe((data) => {
-      this.obiettiviIndividuali = new MatTableDataSource<ObiettivoIndividuale>(
-        data
-      );
-    });
-  }
+getOI() {
+  this.http.get<ObiettivoIndividuale[]>(this.OI_URL).subscribe((data) => {
+    this.obiettiviIndividuali.data = data;
+  });
+}
 
   getOS() {
     this.http.get<ObiettivoStrategico[]>(this.OS_URL).subscribe((data) => {
-      this.obiettiviStrategici = new MatTableDataSource<ObiettivoStrategico>(
-        data
-      );
+      this.obiettiviStrategici.data = data;
     });
   }
+
+  deleteOi(element: any): void {
+    if (window.confirm("Sei sicuro di voler eliminare l'obiettivo " + element.nome + "?")) {
+
+    const params = new HttpParams().set('codice', element.codice);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: params,
+    };
+
+    this.http.post(this.DELETE_OI, null, httpOptions).subscribe(
+      (response) => {
+
+        console.log('Risposta POST:', response);
+        this.getOI();
+
+      },
+      (error) => {
+
+        console.error('Errore POST:', error);
+        this.getOI();
+
+      }
+    );
+
+    this.getOI();
+
+  }}
+
+  deleteOs(element: any): void {
+    if (window.confirm("ATTENZIONE! Eliminando " + element.nome + " verranno eliminati tutti gli obiettivi individuali associati ad esso")){
+    if (window.confirm("Sei sicuro di voler procedere?")){
+
+    const params = new HttpParams().set('codice', element.codice);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: params,
+    };
+
+    this.http.post(this.DELETE_OS, null, httpOptions).subscribe(
+      (response) => {
+
+        console.log('Risposta POST:', response);
+        this.getOS();
+        this.getOI();
+
+      },
+      (error) => {
+
+        console.error('Errore POST:', error);
+        this.getOS();
+        this.getOI();
+      }
+    );
+
+    this.getOS();
+    this.getOI();
+
+  }}}
 
   openDialogAssegnaOI(rowData: any): void {
     const dialogRef = this.dialog.open(DialogContentAssegnazioneOi, { data: rowData});
@@ -102,6 +171,12 @@ export class ObiettiviComponent {
     this.getOI();
     this.getOS();
   }
+
+  ngAfterViewInit() {
+    this.obiettiviIndividuali.paginator = this.paginatorIndividuali;
+    this.obiettiviStrategici.paginator = this.paginatorStrategici;
+  }
+
 }
 
 @Component({
@@ -144,9 +219,9 @@ export class DialogContentOs {
 
     const params = new HttpParams()
     .set("area", this.area.codice)
-    .set("tipologia", this.tipologia)
+    .set("tipologia", 'x')
     .set("nome", this.nome)
-    .set("presidio", this.presidio)
+    .set("presidio", 'x')
     .set("stakeholder", this.stakeholder)
     .set("anno", this.anno);
 
@@ -163,7 +238,7 @@ export class DialogContentOs {
       this.dialogRef.close();
     },
     (error) => {
-      // Gestisci eventuali errori qui.
+
       console.error("Errore POST:", error);
       this.dialogRef.close();
     }
@@ -291,7 +366,7 @@ export class DialogContentOi {
         this.dialogRef.close();
       },
       (error) => {
-        // Gestisci eventuali errori qui.
+
         console.error("Errore POST:", error);
         this.dialogRef.close();
       }

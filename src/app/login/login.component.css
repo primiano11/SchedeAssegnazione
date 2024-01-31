@@ -1,13 +1,13 @@
 .main-div-log {
-  background-image: url(../resources/logo.png);
+  background-image: url(../resources/logo2.png);
   background-repeat:no-repeat;
-  background-position: center center;
-  background-size: 50%;
+  background-position: center 8%;
+  background-size: 10%;
   background-color:rgb(0, 1, 87);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Impedisce che il contenuto si sposta fuori dalla vista */
+  min-height: 100vh;
 }
 
 .login-form {
@@ -16,7 +16,7 @@
 
 
 .div-form {
-  text-align: center; /* Opzionale: allinea il contenuto al centro orizzontalmente */
+  text-align: center;
   align-items: center;
   height: 50%;
   width: 40%;

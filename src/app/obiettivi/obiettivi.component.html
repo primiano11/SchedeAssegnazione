@@ -1,7 +1,7 @@
 <div class="background-div">
   <div class="main-div">
      <div class="add-instance-button">
-        <button (click)="openDialogOs()" mat-raised-button>Aggiungi Obiettivo Strategico</button>
+        <button (click)="openDialogOs()" mat-raised-button>AGGIUNGI OBIETTIVO STRATEGICO</button>
      </div>
      <div class="table-div">
         Obiettivi strategici
@@ -15,34 +15,36 @@
               <th mat-header-cell *matHeaderCellDef> Area Strategica </th>
               <td mat-cell *matCellDef="let element"> {{element.area?.nome}} </td>
            </ng-container>
-           <ng-container matColumnDef="tipologia">
-              <th mat-header-cell *matHeaderCellDef> Tipologia </th>
-              <td mat-cell *matCellDef="let element"> {{element.tipologia}} </td>
-           </ng-container>
            <ng-container matColumnDef="nome">
               <th mat-header-cell *matHeaderCellDef> Nome </th>
               <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
            </ng-container>
-           <ng-container matColumnDef="presidio">
-              <th mat-header-cell *matHeaderCellDef> Presidio </th>
-              <td mat-cell *matCellDef="let element"> {{element.presidio}} </td>
-           </ng-container>
            <ng-container matColumnDef="stakeholder">
-              <th mat-header-cell *matHeaderCellDef> Stakeholder </th>
+              <th mat-header-cell *matHeaderCellDef> Responsabile </th>
               <td mat-cell *matCellDef="let element"> {{element.stakeholder}} </td>
            </ng-container>
            <ng-container matColumnDef="anno">
               <th mat-header-cell *matHeaderCellDef> Anno </th>
               <td mat-cell *matCellDef="let element"> {{element.anno}} </td>
            </ng-container>
+           <ng-container matColumnDef="elimina">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button (click)="deleteOs(element)" class="scheda-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
            <tr mat-header-row *matHeaderRowDef="displayedColumnsStrategici"></tr>
            <tr mat-row *matRowDef="let row; columns: displayedColumnsStrategici;"></tr>
         </table>
+        <div class="table-empty-space"></div>
+        <mat-paginator #paginatorStrategici [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
      </div>
   </div>
   <div class="main-div">
      <div class="add-instance-button">
-        <button (click)="openDialogOi()" mat-raised-button>Aggiungi Obiettivo Individuale</button>
+        <button (click)="openDialogOi()" mat-raised-button>AGGIUNGI OBIETTIVO INDIVIDUALE</button>
      </div>
      <div class="table-div">
         Obiettivi individuali
@@ -60,29 +62,21 @@
               <th mat-header-cell *matHeaderCellDef> Nome </th>
               <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
            </ng-container>
-           <ng-container matColumnDef="responsabilePolitico">
-              <th mat-header-cell *matHeaderCellDef> Responsabile Politico </th>
-              <td mat-cell *matCellDef="let element"> {{element.responsabilePolitico}} </td>
-           </ng-container>
            <ng-container matColumnDef="responsabile">
               <th mat-header-cell *matHeaderCellDef> Responsabile </th>
-              <td mat-cell *matCellDef="let element"> {{element.responsabile}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.obiettivoStrategico?.stakeholder}} </td>
            </ng-container>
            <ng-container matColumnDef="area">
               <th mat-header-cell *matHeaderCellDef> Area </th>
               <td mat-cell *matCellDef="let element"> {{element.area?.nome}} </td>
            </ng-container>
-           <ng-container matColumnDef="tipologia">
-            <th mat-header-cell *matHeaderCellDef> Tipologia </th>
-            <td mat-cell *matCellDef="let element"> {{element.tipologia}} </td>
-         </ng-container>
            <ng-container matColumnDef="indicatore">
               <th mat-header-cell *matHeaderCellDef> Indicatore </th>
               <td mat-cell *matCellDef="let element"> {{element.indicatore}} </td>
            </ng-container>
            <ng-container matColumnDef="peso">
               <th mat-header-cell *matHeaderCellDef> Peso </th>
-              <td mat-cell *matCellDef="let element"> {{element.peso}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.peso}}% </td>
            </ng-container>
            <ng-container matColumnDef="anno">
               <th mat-header-cell *matHeaderCellDef> Anno </th>
@@ -100,9 +94,19 @@
             </button>
           </td>
         </ng-container>
+        <ng-container matColumnDef="elimina">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="deleteOi(element)" class="scheda-button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
            <tr mat-header-row *matHeaderRowDef="displayedColumnsIndividuali"></tr>
            <tr mat-row *matRowDef="let row; columns: displayedColumnsIndividuali;"></tr>
         </table>
+        <div class="table-empty-space"></div>
+        <mat-paginator #paginatorIndividuali [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
      </div>
   </div>
 </div>

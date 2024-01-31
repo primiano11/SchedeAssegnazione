@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { DialogContentDipendenti, DipendentiComponent, DialogContentSchede, DialogContentUpdateDipendenti } from './dipendenti/dipendenti.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -75,7 +76,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatExpansionModule,
     MatDialogModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

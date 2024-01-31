@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core'
+import { AuthService } from '../utils/authservice';
 
 
 @Component({
@@ -9,6 +10,11 @@ import { Component, ViewEncapsulation } from '@angular/core'
 })
 export class HomeComponent {
 
-  value = 'Clear me'
+
+  constructor(private authService: AuthService){}
+
+  logout(){
+    this.authService.logout();
+  }
 
 }

@@ -1,33 +1,32 @@
 <div class="main-div-reg">
 <div class="div-form">
   <mat-card>
-     <mat-toolbar color="primary">Registrazione</mat-toolbar>
-     <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
-        <mat-form-field>
+    <h2>Registra nuovo utente</h2>
+     <form #form="ngForm" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+        <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="email" name="email" placeholder="Inserisci la tua email" />
+        <input matInput [(ngModel)]="email" name="email" placeholder="Inserisci la tua email" required/>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
            <mat-label>Nome utente</mat-label>
-           <input matInput [(ngModel)]="username" name="username" placeholder="Inserisci il tuo nome utente" />
+           <input matInput [(ngModel)]="username" name="username" placeholder="Inserisci il tuo nome utente" required/>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'">
+          <input matInput [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Conferma password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <input matInput [(ngModel)]="confirm" name="confirm" [type]="hide ? 'password' : 'text'" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="register()">Registrati</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="register()" class="reg-button">Registrati</button>
      </form>
   </mat-card>
-  <p class="test">Hai già un account? <a href="#" routerLink="/login" routerLinkActive="active">Accedi!</a></p>
 </div>
 </div>

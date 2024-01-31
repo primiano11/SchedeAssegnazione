@@ -52,6 +52,8 @@ export class LoginComponent {
           window.alert(response.message + ' - ' + 'Bentornato ' + response.username);
           this.authService.login();
           this.router.navigate(['/home/welcome']);
+        } else if(response.status == false){
+          window.alert(response.message);
         }
         console.log('Risposta POST:', response.message);
       },

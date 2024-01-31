@@ -1,16 +1,13 @@
 
 .dialog-container {
-  width: 210mm; /* Larghezza del foglio A4 */
-  height: 297mm; /* Altezza del foglio A4 */
-  max-width: calc(100vw - 32px); /* Massima larghezza consentita per adattarsi a schermi più piccoli */
-  max-height: calc(100vh - 32px); /* Massima altezza consentita per adattarsi a schermi più piccoli */
-  padding: 7%;
+  width: 595px;
+  height: 842px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Aggiungi una leggera ombra */
-  background-color: #ffffff; /* Sfondo bianco */
-  border-radius: 4px; /* Bordi arrotondati */
+  align-items: center ;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-radius: 4px;
 }
 
 .dialog-title {
@@ -53,4 +50,8 @@ tbody td {
   justify-content: flex-end;
   position: absolute;
   bottom: 3%;
+}
+
+.table-empty-space{
+  height: 30px;
 }
